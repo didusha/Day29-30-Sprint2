@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="css/apps.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="onInit()">
     <header>
         <h1>Meme Generator</h1>
         <nav class="nav-bar">
-            <ul>
+            <ul class="clean-list">
                 <li>Gallery</li>
                 <li>Saved</li>
             </ul>
@@ -19,8 +19,8 @@
     <main>
         <section class="gallery-container">
         </section>
-        <img src="img/gallery/1.jpg">
-        <img src="img/gallery/2.jpg">
+        <!-- <img src="img/gallery/1.jpg" alt="">
+        <img src="img/gallery/2.jpg"> -->
         <section class="meme-editor-container">
             <div class="canvas-container">
                 <canvas></canvas>
