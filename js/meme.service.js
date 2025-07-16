@@ -72,9 +72,9 @@ function createMeme(imgId) {
         lines: [
             {
                 txt: 'YOU ROCK!',
-                size: 20,
+                size: 30,
                 color: 'black',
-                x: 100,
+                x: 250,
                 y: 100,
             }
         ]

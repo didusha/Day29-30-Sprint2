@@ -3,7 +3,6 @@
 var gElCanvas
 var gCtx
 
-
 function onInit() {
     renderGallery()
     gElCanvas = document.querySelector('canvas')
@@ -14,9 +13,8 @@ function onInit() {
 
 // Render Meme
 function onSelectImg(imgId) {
+    createMeme(imgId)
     showEditor()
-    // const imgId = ImgId
-    const meme = createMeme(imgId)
     // renderMeme()
 }
 
@@ -24,51 +22,20 @@ function renderMeme() {
     const meme = getMeme()
     console.log("🚀 ~ renderMeme ~ meme:", meme)
 
-    var elImg = new Image();
-    elImg.src = `img/gallery/${meme.selectedImgId}.jpg`
+    var img = new Image();
+    img.src = `img/gallery/${meme.selectedImgId}.jpg`
 
     // gElCanvas.height = (gElImg.naturalHeight / gElImg.naturalWidth) * gElCanvas.width
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-    meme.lines.forEach((line, idx) => {
-        gCtx.font = line.size + 'px Ariel'
-        gCtx.fillStyle = line.color
-        gCtx.textAlign = 'center'
-        gCtx.fillText = (line.txt, line.x, line.y)
-    })
-}
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+        meme.lines.forEach((line, idx) => {
+            gCtx.font = line.size + 'px Arial'
+            gCtx.fillStyle = line.color
+            gCtx.textAlign = 'center'
+            gCtx.fillText(line.txt, line.x, line.y)
+        })
+    }
 
-// Text on Meme
-// function drawText({ offsetX = 100, offsetY=100 }) {
-//     const elTextInput = document.querySelector('.canvas-text')
-//     const text = elTextInput.value || 'You Rock!!'
-//     // const text = 'You Rock!!'
-//     gCtx.lineWidth = 2
-//     gCtx.strokeStyle = 'black'
-//     gCtx.fillStyle = 'yellow'
-//     gCtx.font = '40px Arial'
-//     gCtx.textAlign = 'center'
-//     gCtx.textBaseline = 'middle'
-//     gCtx.fillText(text, offsetX, offsetY)
-//     gCtx.strokeText(text, offsetX, offsetY)
-
-// }
-
-//Resize Canvas
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
-    // var meme = getMeme()
-    // renderMeme(meme)
-}
-
-//Render Gallery
-function renderGallery() {
-    const elGallery = document.querySelector('.gallery-container')
-    const imgs = getImgs()
-    var strGallery = imgs.map(img =>
-        `<img src="${img.url}" alt="" onclick="onSelectImg(${img.id})" data-id="${img.i}">`)
-    elGallery.innerHTML = strGallery.join('')
 }
 
 //Download image 
@@ -103,13 +70,22 @@ function onUploadToFB(url) {
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
 
+//Render Gallery
+function renderGallery() {
+    const elGallery = document.querySelector('.gallery-container')
+    const imgs = getImgs()
+    var strGallery = imgs.map(img =>
+        `<img src="${img.url}" alt="" onclick="onSelectImg(${img.id})" data-id="${img.id}">`)
+    elGallery.innerHTML = strGallery.join('')
+}
+
 //DOM
 function onGalleryClick() {
     // Show Gallery
-    document.querySelector('.gallery-container').classList.add('grid')
+    // document.querySelector('.gallery-container').classList.add('grid')
     document.querySelector('.gallery-container').classList.remove('hidden')
     // Hide Editor
-    document.querySelector('.main-container').classList.remove('grid')
+    // document.querySelector('.main-container').classList.remove('grid')
     document.querySelector('.main-container').classList.add('hidden')
 }
 
@@ -125,7 +101,24 @@ function showEditor() {
     renderMeme()
 }
 
+//Resize Canvas
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
+    // var meme = getMeme()
+    // renderMeme(meme)
+}
+
 //clear Canvas
 // function onClearCanvas() {
 //     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 // }
+
+// Add text on Meme
+function onDrawText(ev) {
+    const meme = getMeme()
+    const line = meme.lines[getMeme().selectedLineIdx];
+    line.txt = ev.target.value;
+    renderMeme();
+}

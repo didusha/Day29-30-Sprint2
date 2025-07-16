@@ -26,7 +26,7 @@
         <section class="main-container grid editor-layout hidden">
             <!-- Canvas -->
             <div class="canvas-container">
-                    <canvas width="400" height="400" oninput="drawText(event)"> </canvas>
+                    <canvas width="500" height="500"></canvas>
                     <!-- onclick="onDraw(event)" onmousedown="onDown(event)"
                         onmouseup="onUp()" ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
                         ontouchmove="onDraw(event)" -->
@@ -34,7 +34,7 @@
             </div>
             <!-- Editor -->
             <div class="editor-container">
-                <input class="canvas-text" type="text" placeholder="Type something" />
+                <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
             </div>
         </section>
         <img src="" alt="" >
