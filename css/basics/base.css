@@ -37,9 +37,7 @@ img {
 }
 
 .btn:hover {
-    background-color: #265df2;
-}
-
-.btn:active {
-    border-color: #1e4de0;
+    outline: 3px solid var(--clrPrimary);
+    border-color: white;
+    /* border: 3px solid var(--clrPrimary); */
 }

@@ -2,7 +2,7 @@
 .main-header {
 	position: sticky;
 	top: 0;
-	background-color: var(--clrSecondary);
+	background-color: var(--clrPrimary);
 	margin-bottom: 1rem;
 }
 
