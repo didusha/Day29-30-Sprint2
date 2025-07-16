@@ -1,0 +1,17 @@
+/* main-header */
+.main-header {
+	position: sticky;
+	top: 0;
+	background-color: var(--clrSecondary)
+}
+
+.main-header .main-nav a {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+
+	min-width: 100px;
+	min-height: 100px;
+
+	transition: box-shadow 0.2s;
+}

@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/apps.css">
     <title>Document</title>
 </head>
-<body onload="onInit()">
-    <header>
+
+<body onload="onInit()" class="">
+    <header class="main-header flex space-between align-center">
         <h1>Meme Generator</h1>
-        <nav class="nav-bar">
-            <ul class="clean-list">
-                <li>Gallery</li>
-                <li>Saved</li>
+        <nav class="main-nav">
+            <ul class="clean-list flex ">
+                <li><button href="#" onclick="onGalleryClick()">Gallery</button></li>
+                <li><button href="#">Saved</button></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="gallery-container">
-        </section>
-        <!-- <img src="img/gallery/1.jpg" alt="">
-        <img src="img/gallery/2.jpg"> -->
-        <section class="meme-editor-container">
+        <!-- Gallery -->
+        <section class="gallery-container grid"></section>
+
+        <!-- Editor -->
+        <section class="main-container grid editor-layout hidden">
             <div class="canvas-container">
-                <canvas></canvas>
+                    <canvas width="400" height="400"> </canvas>
+                    <!-- onclick="onDraw(event)" onmousedown="onDown(event)"
+                        onmouseup="onUp()" ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
+                        ontouchmove="onDraw(event)" -->
+                    </canvas>
             </div>
-            <div class="editor-container"></div>
+            <div class="editor-container">
+                <input class="canvas-text" type="text" placeholder="Type something" />
+            </div>
         </section>
-        
+
 
     </main>
-    <footer>
+    <footer class="main-footer">
         <small>All rights reserved 2025</small>
     </footer>
 
@@ -38,4 +46,5 @@
     <script src="js/meme.controller.js"></script>
     <script src="js/meme.service.js"></script>
 </body>
+
 </html>

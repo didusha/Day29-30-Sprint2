@@ -1,4 +1,14 @@
+.gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
 
-.gallery-container img {
-    width: 100px;
+    margin: 010px auto;
+}
+
+.gallery-container img{
+    cursor: pointer;
+}
+
+.gallery-container img:hover{
+    outline: 5px solid var(--clrSecondary);
 }

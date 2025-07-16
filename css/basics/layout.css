@@ -1,3 +1,8 @@
-.main-layout {
+/* .main-layout {
 		grid-template-columns: minmax(20px, 1fr) minmax(auto, var(--m)) minmax(20px, 1fr);
-	}
+	} */
+
+/* Editor layout */
+.editor-layout{
+	grid-template-columns: repeat(2, minmax(auto, 1fr))
+}
