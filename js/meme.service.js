@@ -83,6 +83,12 @@ function createMeme(imgId) {
     return gMeme
 }
 
+
+function setLineTxt(ev) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.txt = ev.target.value
+}
+
 //Upload to cloud
 async function uploadImg(imgData, onSuccess) {
     const CLOUD_NAME = 'webify'

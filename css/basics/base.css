@@ -1,4 +1,4 @@
-* *::before *::after{
+* *::before *::after {
     box-sizing: border-box;
 }
 
@@ -22,4 +22,24 @@ h6 {
 
 img {
     width: 100%;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 2rem;
+    font-weight: 600;
+    width: 3rem;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    background-color: white;
+}
+
+.btn:hover {
+    background-color: #265df2;
+}
+
+.btn:active {
+    border-color: #1e4de0;
 }

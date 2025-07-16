@@ -117,8 +117,6 @@ function resizeCanvas() {
 
 // Add text on Meme
 function onDrawText(ev) {
-    const meme = getMeme()
-    const line = meme.lines[getMeme().selectedLineIdx];
-    line.txt = ev.target.value;
-    renderMeme();
+    setLineTxt(ev)
+    renderMeme()
 }

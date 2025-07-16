@@ -12,3 +12,7 @@
 .gallery-container img:hover{
     outline: 5px solid var(--clrSecondary);
 }
+
+.gallery-container.grid {
+  overflow-y: auto;
+}

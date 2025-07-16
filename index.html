@@ -26,18 +26,46 @@
         <section class="main-container grid editor-layout hidden">
             <!-- Canvas -->
             <div class="canvas-container">
-                    <canvas width="500" height="500"></canvas>
-                    <!-- onclick="onDraw(event)" onmousedown="onDown(event)"
+                <canvas width="500" height="500"></canvas>
+                <!-- onclick="onDraw(event)" onmousedown="onDown(event)"
                         onmouseup="onUp()" ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
                         ontouchmove="onDraw(event)" -->
-                    </canvas>
+                </canvas>
             </div>
             <!-- Editor -->
             <div class="editor-container">
                 <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
+                <div>
+                    <button class="btn btn-switch-line" onclick="onSwitchLine()"><img
+                            src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                    <button class="btn add-line" onclick="onAddLine()"><img src="img/icons/add.png" alt=""></button>
+                    <button class="btn delete-line" onclick="onDeleteLine()"><img src="img/icons/trash.png"
+                            alt=""></button>
+                </div>
+                <div>
+                    <button class="btn btn-increase-font" onclick="onIncSize(1)"><img
+                            src="img/icons/increase font - icon.png" alt=""></button>
+                    <button class="btn btn-decrease-font" onclick="onIncSize(-1)"><img
+                            src="img/icons/decrease font - icon.png" alt=""></button>
+                    <button class="btn btn-align-left" onclick="onSetAlign('left')"><img
+                            src="img/icons/align-to-left.png" alt=""></button>
+                    <button class="btn btn-center" onclick="onSetAlign('center')"><img
+                            src="img/icons/center-text-alignment.png" alt=""></button>
+                    <button class="btn btn-align-right" onclick="onSetAlign('right')"><img
+                            src="img/icons/align-to-right.png" alt=""></button>
+                </div>
+                <div>
+                <select class="font-picker" onchange="onSetFont(this)">
+                    <option value="impact">Impact</option>
+                    <option value="arial">Arial</option>
+                    <option value="verdana">Verdana</option>
+                    <button class="btn"><input type="color" onchange="onChangeTextColor(event)"></button>
+                    <input type="color" onchange="onChangeTextFill(event)">
+                </select>
+                </div>
             </div>
         </section>
-        <img src="" alt="" >
+        <img src="" alt="">
 
     </main>
     <footer class="main-footer fixed">
