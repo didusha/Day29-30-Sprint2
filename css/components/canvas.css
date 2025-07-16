@@ -1,0 +1,13 @@
+.canvas-container {
+    background-color: steelblue;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: white;
+    border: 1px solid black;
+    width: 90%;
+}
