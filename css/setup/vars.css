@@ -1,0 +1,21 @@
+:root {
+    /* PALLETE */
+    --clrPrimary3: #1e1e1e;
+    --clrPrimary2: #292929;
+    --clrPrimary1: #4f4e4e;
+    --clrPrimary: #606060;
+    --clrPrimary-1: #818181;
+    --clrPrimary-2: #c2c1c1;
+    --clrPrimary-3: #f8f8f8;
+    --clrPrimary-4: #ffffff;
+
+    --clrSecondary: #58c93a;
+
+    /* layout */
+    --headerHeight: 100px;
+
+    /* mq */
+    --l: 1060px;
+    --m: 860px;
+    --s: 600px;
+}
