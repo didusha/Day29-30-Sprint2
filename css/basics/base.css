@@ -41,5 +41,4 @@ canvas {
 .btn:hover {
     outline: 3px solid var(--clrPrimary);
     border-color: white;
-    /* border: 3px solid var(--clrPrimary); */
 }

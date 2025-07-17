@@ -4,14 +4,14 @@
 
 /* BASICS  */
 @import url("basics/base.css");
-@import url("basics/layout.css");
+/* @import url("basics/layout.css"); */
 @import url("basics/helpers.css");
 
 /* COMPONENTS */
 @import url("components/gallery.css");
 @import url("components/main-header.css");
-@import url("components/main-container.css");
-@import url("components/canvas.css");
+/* @import url("components/main-container.css"); */
+/* @import url("components/canvas.css"); */
 @import url("components/ediotr.css");
 @import url("components/footer.css");
 

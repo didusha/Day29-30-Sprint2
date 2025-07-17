@@ -6,7 +6,7 @@
 
     width: 90%;
     margin: 0 auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
     gap: 10px;
     padding-block: 10px;
@@ -14,17 +14,12 @@
 
 .canvas-container {
     text-align: center;
-
     width: 90%;
     margin: 0 auto;
-    border: 1px solid black;
+
     border-radius: 10px;
     gap: 10px;
     padding-block: 10px;
-}
-
-.canvas-container {
-    text-align: center;
 }
 
 input.canvas-text {
