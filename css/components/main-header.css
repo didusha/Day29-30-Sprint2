@@ -7,15 +7,9 @@
 	padding: 1rem 1rem .625rem 1rem;
 }
 
-.main-header .main-nav a {
-	display: grid;
-	justify-content: center;
+.main-header .main-nav {
+	display: flex;
 	align-items: center;
-
-	min-width: 100px;
-	min-height: 100px;
-
-	transition: box-shadow 0.2s;
 }
 
 .logo {
@@ -28,5 +22,6 @@
 	background-color: transparent;
 	font-size: 1.1875rem;
 	color: #ffffff;
-
+	cursor: pointer;
+	margin-left: 1em;
 }

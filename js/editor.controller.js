@@ -40,18 +40,18 @@ function onSetFont(elInput) {
     renderMeme()
 }
 
-function onChangeTextColor(event){
+function onChangeTextColor(event) {
     const value = event.target.value
     changeTextColor(value)
     renderMeme()
 }
 
-function onAddEmoji(imoji){
+function onAddEmoji(imoji) {
     addImoji(imoji)
     renderMeme()
 }
 
-function onMoveText(diff){
+function onMoveText(diff) {
     moveTextUpDown(diff)
     renderMeme()
 }
@@ -63,28 +63,22 @@ function onDownloadImg(elLink) {
 }
 
 //Upload to cloud
-async function uploadImg(imgData, onSuccess) {
-    const CLOUD_NAME = 'webify'
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-    const formData = new FormData()
-    formData.append('file', imgData)
-    formData.append('upload_preset', 'webify')
-    try {
-        const res = await fetch(UPLOAD_URL, {
-            method: 'POST',
-            body: formData
-        })
-        const data = await res.json()
-        onSuccess(data.secure_url)
-
-    } catch (err) {
-        console.log(err)
+function onShare(ev) {
+    const canvasData = gElCanvas.toDataURL('image/jpeg')
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        document.querySelector('.share-container').innerHTML =
+            `<a href="${uploadedImgUrl}">Image Url</a>
+            <p>Image url: ${uploadedImgUrl}</p>
+            <button class="btn-facebook" target="_blank" onclick="onUploadToFB('${encodedUploadedImgUrl}')">
+            Share on Facebook</button>`
     }
+    uploadImg(canvasData, onSuccess)
 }
+
 
 //upload to facebook
 function onUploadToFB(url) {
     // console.log('url:', url)
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
-

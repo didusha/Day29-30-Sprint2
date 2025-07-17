@@ -81,12 +81,13 @@
                 </div>
                 <div>
                     <!-- TODO Fix function -->
-                    <button class="btn btn-text" onclick="onShareToFB(event)">Share</button>
+                    <button class="btn btn-text" onclick="onShare(event)">Share</button>
                     <button class="btn btn-text">
                         <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a>
                     </button>
-                    <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
-                        class="color-picker" onchange="onChangeTextColor(event)" />
+                    <button class="btn btn-text">
+                        <a href="#" onclick="onSaveMeme(this)">Save</a>
+                    </button>
                 </div>
 
 
@@ -95,9 +96,9 @@
         </section>
 
     </main>
-    <footer class="main-footer fixed">
+    <!-- <footer class="main-footer fixed">
         <small>All rights reserved 2025</small>
-    </footer>
+    </footer> -->
 
     <script src="js/meme.utils.js"></script>
     <script src="js/storage.service.js"></script>
