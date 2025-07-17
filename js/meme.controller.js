@@ -81,6 +81,7 @@ function checkAlignment(alignment) {
 
 //Download image 
 function onDownloadImg(elLink) {
+    // removeBorders()
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
@@ -106,8 +107,7 @@ function onUploadImg(ev) {
     uploadImg(canvasData, onSuccess)
 }
 
-function onUploadToFB(url) {
-    // console.log('url:', url)
+function onShareToFB(url) {
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
 

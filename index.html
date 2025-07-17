@@ -54,30 +54,37 @@
                     <button class="btn btn-align-right" onclick="onSetAlignment('right')"><img
                             src="img/icons/align-to-right.png" alt=""></button>
                 </div>
-                  <div>
+                <div>
                     <button class="btn emoji" onclick="onAddEmoji('🤯')">🤯</button>
                     <button class="btn emoji" onclick="onAddEmoji('💩')">💩</button>
                     <button class="btn emoji" onclick="onAddEmoji('😘')">😘</button>
                     <button class="btn emoji" onclick="onAddEmoji('❤️')">❤️</button>
                     <button class="btn emoji" onclick="onAddEmoji('🥳')">🥳</button>
                 </div>
-                <div>
+                <div class="flex">
                     <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
                         <option value="arial">Arial</option>
                         <option value="impact">Impact</option>
                         <option value="verdana">Verdana</option>
                     </select>
-                    <button class="btn btn-color-picker"><img class="color-picker" src="img/Icons/paint-board-and-brush.png">
-                    <label for="color-picker">
-                        <input type="color" hidden name="color-picker" value="#000000" id="color-picker" class="color-picker"
-                            onchange="onChangeTextColor(event)" />
-                    </label>
+                    <button class="btn btn-color-picker">
+                        <label for="color-picker">
+                            <img class="color-picker"src="img/Icons/paint-board-and-brush.png">
+                        </label>
+                    </button>
+                    <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
+                        class="color-picker" onchange="onChangeTextColor(event)" />
+                </div>
+                <div>
+                    <button class="btn btn-text" onclick="onShareToFB(event)">Share</button>
+                    <button class="btn btn-text">
+                        <!-- TODO Fix function -->
+                        <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a>
                     </button>
                 </div>
-              
+
             </div>
         </section>
-        <img src="" alt="">
 
     </main>
     <footer class="main-footer fixed">

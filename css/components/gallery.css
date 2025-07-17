@@ -1,8 +1,7 @@
 .gallery-container {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-
-    margin: 010px auto;
+    margin: 10px auto;
 }
 
 .gallery-container img{

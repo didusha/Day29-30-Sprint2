@@ -3,7 +3,7 @@
 	position: sticky;
 	top: 0;
 	background-color: var(--clrPrimary);
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 	padding: 1rem 1rem .625rem 1rem;
 }
 
@@ -21,7 +21,6 @@
 .logo {
 	width: 40%;
 	min-width: 10rem;
-	/* max-width: 20rem; */
 }
 
 .btn-nav {
@@ -29,6 +28,5 @@
 	background-color: transparent;
 	font-size: 1.1875rem;
 	color: #ffffff;
-	font-family: "Montserrat";
-	text-align: center;
+
 }
