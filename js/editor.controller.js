@@ -25,3 +25,13 @@ function onDeleteLine(){
     deleteLine()
     renderMeme()
 }
+
+function onChangeFontSize(diff){
+    changeFontSize(diff)
+    renderMeme()
+}
+
+function onSetAlignment(alignDirection){
+    setAlignment(alignDirection)
+    renderMeme()
+}

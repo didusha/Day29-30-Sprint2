@@ -46,6 +46,11 @@ function getImgs() {
     return gImgs
 }
 
+function setLineTxt(ev) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.txt = ev.target.value
+}
+
 function switchLine() {
     let { selectedLineIdx, lines } = gMeme
     selectedLineIdx < lines.length - 1 ? gMeme.selectedLineIdx += 1 : gMeme.selectedLineIdx = 0
@@ -63,6 +68,15 @@ function deleteLine(){
     gMeme.lines.splice(lineIdx, 1)
 }
 
+function changeFontSize(diff){
+    gMeme.lines[gMeme.selectedLineIdx].size += diff
+}
+
+function setAlignment(alignDirection){
+    gMeme.lines[gMeme.selectedLineIdx].alignment = alignDirection
+}
+
+//Create functions
 function _createImgs() {
     gImgs = loadFromStorage(IMG_KEY, gImgs)
     if (!gImgs || !gImgs.length) {
@@ -98,6 +112,7 @@ function createMeme(imgId) {
                 color: 'black',
                 x: 250,
                 y: 100,
+                alignment: 'center'
             },
             {
                 txt: 'YOU WEIRD!',
@@ -105,6 +120,7 @@ function createMeme(imgId) {
                 color: 'black',
                 x: 250,
                 y: 400,
+                alignment: 'center'
             }
         ]
     }
@@ -119,13 +135,9 @@ function _createLine(txt, size, color) {
         color: color,
         x: 250,
         y: 250,
+        alignment: 'center'
     }
 
-}
-
-function setLineTxt(ev) {
-    const line = gMeme.lines[gMeme.selectedLineIdx]
-    line.txt = ev.target.value
 }
 
 //Upload to cloud

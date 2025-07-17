@@ -28,27 +28,53 @@ function renderMeme() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => {
-            gCtx.font = line.size + 'px Arial'
+            gCtx.font = line.size + 'px arial'
             gCtx.fillStyle = line.color
             gCtx.textAlign = 'center'
-            gCtx.fillText(line.txt, line.x, line.y)
+            const diff = checkAlignment(line.alignment)
+
+            gCtx.fillText(line.txt, line.x + diff, line.y)
         })
-        if(meme.selectedLineIdx === 0) setLineBorder()
-            else{
-                setLineBorder()
+        if (meme.selectedLineIdx === 0) setTextBorder()
+        else {
+            setTextBorder()
         }
     }
 }
 
-function setLineBorder() {
+function setTextBorder() {
     const { selectedLineIdx, lines } = getMeme()
-    // gCtx.beginPath()
+    gCtx.beginPath()
     const line = lines[selectedLineIdx]
     gCtx.strokeStyle = line.color
-    gCtx.lineWidth = 3
-    const textWidth = gCtx.measureText(line.txt).width
-    const textHeight = line.size
-    gCtx.strokeRect(line.x - textWidth / 2 - 5, line.y - line.size, textWidth + 10, textHeight + 10)
+    gCtx.lineWidth = 2
+
+    //Update text measurments for inc/dec
+    gCtx.font = `${line.size}px Arial`;
+    const textMetrics = gCtx.measureText(line.txt)
+
+    const textWidth = textMetrics.width
+    const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
+    //Check alignment
+    const diff = checkAlignment(line.alignment)
+
+    gCtx.strokeRect(line.x + diff - textWidth / 2 - 5, line.y - textMetrics.actualBoundingBoxAscent - 5, textWidth + 10, textHeight + 10)
+}
+
+function checkAlignment(alignment) {
+    let diff
+    switch (alignment) {
+        case 'left':
+            diff = -150
+            break
+        case 'center':
+            diff = 0
+            break
+        case 'right':
+            diff = 150
+            break
+    }
+    return diff
 }
 
 //Download image 
