@@ -46,6 +46,16 @@ function onChangeTextColor(event){
     renderMeme()
 }
 
+function onAddEmoji(imoji){
+    addImoji(imoji)
+    renderMeme()
+}
+
+function onMoveText(diff){
+    moveTextUpDown(diff)
+    renderMeme()
+}
+
 //Download image 
 function onDownloadImg(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg')

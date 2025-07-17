@@ -36,6 +36,10 @@
             <div class="editor-container">
                 <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
                 <div>
+                    <button class="btn btn-increase-font" onclick="onMoveText(-1)"><img
+                            src="img/icons/up-arrow.png" alt=""></button>
+                    <button class="btn btn-decrease-font" onclick="onMoveText(1)"><img
+                            src="img/icons/down-arrow.png" alt=""></button>
                     <button class="btn btn-switch-line" onclick="onSwitchLine()"><img
                             src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
                     <button class="btn add-line" onclick="onAddLine()"><img src="img/icons/add.png" alt=""></button>
@@ -43,6 +47,7 @@
                             alt=""></button>
                 </div>
                 <div>
+
                     <button class="btn btn-increase-font" onclick="onChangeFontSize(1)"><img
                             src="img/icons/increase font - icon.png" alt=""></button>
                     <button class="btn btn-decrease-font" onclick="onChangeFontSize(-1)"><img

@@ -13,8 +13,9 @@
 }
 
 .canvas-container {
+    place-self: center;
     text-align: center;
-    width: 90%;
+    max-width: 90%;
     margin: 0 auto;
 
     border-radius: 10px;
@@ -23,8 +24,8 @@
 }
 
 input.canvas-text {
-    width: 80%;
-    padding: 5px 20px;
+    width: 300px;
+    padding: 10px 20px;
     border: 2px solid black;
     border-radius: 10px;
 }
@@ -33,11 +34,6 @@ input.canvas-text {
     font-size: 1.2em;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 0.8rem 1rem;
-}
-
-select.font-picker{
-    padding: 0;
 }
 
 .btn-color-picker {
@@ -45,13 +41,26 @@ select.font-picker{
 }
 
 .btn-text {
-
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    font-weight: 400;
     width: max-content;
+    border: none;
+    color: white;
+    background-color: var(--clrPrimary);
+}
+
+.btn-text:hover{
+    background-color: var(--clrPrimary-1);
 }
 
 .btn-text a {
     text-decoration: none;
     color: black;
+}
+
+.btn-text a:visited {
+    color: white;
 }
 
 div.fix {

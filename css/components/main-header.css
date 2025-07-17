@@ -19,7 +19,7 @@
 }
 
 .logo {
-	width: 40%;
+	max-width: 200px;
 	min-width: 10rem;
 }
 

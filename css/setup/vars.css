@@ -6,14 +6,7 @@
     --clrPrimary: #606060;
     --clrPrimary-1: #818181;
     --clrPrimary-2: #c2c1c1;
-
+    
+    --clrPrimary-1: #ff4d00;
     --clrPrimary: #ff7f00;
-
-    /* layout */
-    --headerHeight: 100px;
-
-    /* mq */
-    --l: 1060px;
-    --m: 860px;
-    --s: 600px;
 }

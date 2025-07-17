@@ -65,7 +65,6 @@ function switchLine() {
 }
 
 function addLine(txt, size, color) {
-    //TODO fix input (and input focus?)
     const line = _createLine(txt, size, color)
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
@@ -82,6 +81,14 @@ function changeFontSize(diff) {
 
 function setAlignment(alignDirection) {
     gMeme.lines[gMeme.selectedLineIdx].alignment = alignDirection
+}
+
+function addImoji(imoji) {
+    gMeme.lines[gMeme.selectedLineIdx].txt += imoji
+}
+
+function moveTextUpDown(diff){
+    gMeme.lines[gMeme.selectedLineIdx].y += diff
 }
 
 //Create functions
@@ -141,7 +148,7 @@ function createMeme(imgId) {
 
 function _createLine(txt, size, color, font) {
     return {
-        txt: txt,                        
+        txt: txt,
         size: 15,
         color: color,
         x: 150,
