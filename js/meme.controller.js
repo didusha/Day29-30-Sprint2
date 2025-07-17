@@ -67,13 +67,13 @@ function checkAlignment(alignment) {
     let diff
     switch (alignment) {
         case 'left':
-            diff = -150
+            diff = -100
             break
         case 'center':
             diff = 0
             break
         case 'right':
-            diff = 150
+            diff = 100
             break
     }
     return diff

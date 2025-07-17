@@ -117,19 +117,19 @@ function createMeme(imgId) {
         lines: [
             {
                 txt: 'YOU ROCK!',
-                size: 30,
+                size: 15,
                 color: 'black',
-                x: 250,
-                y: 100,
+                x: 150,
+                y: 50,
                 alignment: 'center',
                 font: 'arial'
             },
             {
                 txt: 'YOU WEIRD!',
-                size: 30,
+                size: 15,
                 color: 'black',
-                x: 250,
-                y: 400,
+                x: 150,
+                y: 250,
                 alignment: 'center',
                 font: 'arial'
             }
@@ -141,11 +141,11 @@ function createMeme(imgId) {
 
 function _createLine(txt, size, color, font) {
     return {
-        txt: txt,                           //`${txt}`,
-        size: size,
+        txt: txt,                        
+        size: 15,
         color: color,
-        x: 250,
-        y: 250,
+        x: 150,
+        y: 150,
         alignment: 'center',
         font: 'arial'
     }
