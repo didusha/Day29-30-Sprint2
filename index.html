@@ -55,6 +55,7 @@
                             src="img/icons/align-to-right.png" alt=""></button>
                 </div>
                 <div>
+                <div>
                     <button class="btn emoji" onclick="onAddEmoji('🤯')">🤯</button>
                     <button class="btn emoji" onclick="onAddEmoji('💩')">💩</button>
                     <button class="btn emoji" onclick="onAddEmoji('😘')">😘</button>
@@ -71,6 +72,19 @@
                         <label for="color-picker">
                             <img class="color-picker"src="img/Icons/paint-board-and-brush.png">
                         </label>
+                    <button class="btn btn-color-picker">
+                        <label for="color-picker">
+                            <img class="color-picker"src="img/Icons/paint-board-and-brush.png">
+                        </label>
+                    </button>
+                    <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
+                        class="color-picker" onchange="onChangeTextColor(event)" />
+                </div>
+                <div>
+                    <button class="btn btn-text" onclick="onShareToFB(event)">Share</button>
+                    <button class="btn btn-text">
+                        <!-- TODO Fix function -->
+                        <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a>
                     </button>
                     <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
                         class="color-picker" onchange="onChangeTextColor(event)" />
@@ -82,6 +96,7 @@
                         <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a>
                     </button>
                 </div>
+
 
             </div>
         </section>
