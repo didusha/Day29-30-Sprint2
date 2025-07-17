@@ -9,15 +9,12 @@ function onDrawText(ev) {
 
 // Editor buttons functions
 function onSwitchLine() {
-    switchLine() = m,
-        renderMeme()
+    switchLine()
+    renderMeme()
 }
 
 function onAddLine() {
-    //TODO: Change TO TAKE FROM INPUTS
-    const fontSize = 30
-    const color = 'black'
-    addLine('Type..', fontSize, color)
+    addLine('Type something..', 30, 'black')
     renderMeme()
 }
 
@@ -37,7 +34,14 @@ function onSetAlignment(alignDirection) {
 }
 
 function onSetFont(elInput) {
+    //TODO check this function
     let value = elInput.value
-    onSetFont(value)
+    setFont(value)
+    renderMeme()
+}
+
+function onChangeTextColor(event){
+    const value = event.target.value
+    changeTextColor(value)
     renderMeme()
 }

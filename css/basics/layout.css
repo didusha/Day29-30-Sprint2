@@ -13,6 +13,7 @@
 
 
 /* Editor layout */
-.editor-layout {
-	grid-template-columns: repeat(2, minmax(auto, 1fr))
-}
+ .editor-layout{
+        display: block;
+		text-align: center;
+    }

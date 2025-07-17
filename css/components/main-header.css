@@ -4,6 +4,7 @@
 	top: 0;
 	background-color: var(--clrPrimary);
 	margin-bottom: 1rem;
+	padding: 1rem 1rem .625rem 1rem;
 }
 
 .main-header .main-nav a {
@@ -15,4 +16,19 @@
 	min-height: 100px;
 
 	transition: box-shadow 0.2s;
+}
+
+.logo {
+	width: 40%;
+	min-width: 10rem;
+	/* max-width: 20rem; */
+}
+
+.btn-nav {
+	border: none;
+	background-color: transparent;
+	font-size: 1.1875rem;
+	color: #ffffff;
+	font-family: "Montserrat";
+	text-align: center;
 }

@@ -9,6 +9,7 @@ html {
 
 body {
     margin: 0;
+    background-color: lightblue;
 }
 
 h1,
@@ -28,11 +29,10 @@ img {
     padding: 5px 10px;
     font-size: 2rem;
     font-weight: 600;
-    width: 3rem;
+    width: 4rem;
     border: 1px solid black;
     border-radius: 8px;
     cursor: pointer;
-    text-align: center;
     background-color: white;
 }
 

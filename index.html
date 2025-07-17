@@ -10,11 +10,11 @@
 
 <body onload="onInit()" class="">
     <header class="main-header flex space-between align-center ">
-        <h1>Meme Generator</h1>
+        <h1><img src="img/LOGO.png" class="logo"></h1>
         <nav class="main-nav">
             <ul class="clean-list flex ">
-                <li><button href="#" onclick="onGalleryClick()">Gallery</button></li>
-                <li><button href="#">Saved</button></li>
+                <li><button href="#" class="btn-nav" onclick="onGalleryClick()">Gallery</button></li>
+                <li><button href="#" class="btn-nav">Saved</button></li>
             </ul>
         </nav>
     </header>
@@ -54,15 +54,27 @@
                     <button class="btn btn-align-right" onclick="onSetAlignment('right')"><img
                             src="img/icons/align-to-right.png" alt=""></button>
                 </div>
-                <div>
-                <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
-                    <option value="arial">Arial</option>
-                    <option value="impact">Impact</option>
-                    <option value="verdana">Verdana</option>
-                    <button class="btn"><input type="color" onchange="onChangeTextColor(event)"></button>
-                    <input type="color" onchange="onChangeTextFill(event)">
-                </select>
+                  <div>
+                    <button class="btn emoji" onclick="onAddEmoji('🤯')">🤯</button>
+                    <button class="btn emoji" onclick="onAddEmoji('💩')">💩</button>
+                    <button class="btn emoji" onclick="onAddEmoji('😘')">😘</button>
+                    <button class="btn emoji" onclick="onAddEmoji('❤️')">❤️</button>
+                    <button class="btn emoji" onclick="onAddEmoji('🥳')">🥳</button>
                 </div>
+                <div>
+                    <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
+                        <option value="arial">Arial</option>
+                        <option value="impact">Impact</option>
+                        <option value="verdana">Verdana</option>
+                    </select>
+                    <button class="btn btn-color-picker"><img class="color-picker" src="img/Icons/paint-board-and-brush.png">
+                    <label for="color-picker">
+                        <input type="color" hidden name="color-picker" value="#000000" id="color-picker" class="color-picker"
+                            onchange="onChangeTextColor(event)" />
+                    </label>
+                    </button>
+                </div>
+              
             </div>
         </section>
         <img src="" alt="">

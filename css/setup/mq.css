@@ -1,0 +1,17 @@
+/* Large: 1100px */
+/* medium: 960px */
+/* small: 740px */
+
+@media (max-width: 640px) {
+   
+}
+
+@media (min-width: 640px) {}
+.editor-layout {
+    grid-template-columns: repeat(2, minmax(auto, 1fr))
+}
+
+@media (min-width: 960px) {
+}
+
+@media (min-width: 1160px) {}

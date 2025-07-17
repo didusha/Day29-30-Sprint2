@@ -14,20 +14,20 @@ var gImgs = []
 // ]
 
 var gMeme
-    // selectedImgId: 5,
-    //     selectedLineIdx: 0,
-    //         lines: [
-    //             {
-    //                 txt: 'I sometimes eat Falafel',
-    //                 size: 20,
-    //                 color: 'red'
-    //             },
-    //             {
-    //                 txt: 'I sometimes eat Falafel',
-    //                 size: 20,
-    //                 color: 'red'
-    //             }
-    //         ]
+// selectedImgId: 5,
+//     selectedLineIdx: 0,
+//         lines: [
+//             {
+//                 txt: 'I sometimes eat Falafel',
+//                 size: 20,
+//                 color: 'red'
+//             },
+//             {
+//                 txt: 'I sometimes eat Falafel',
+//                 size: 20,
+//                 color: 'red'
+//             }
+//         ]
 
 var gKeywordSearchCountMap = {
     'funny': 12,
@@ -50,8 +50,12 @@ function setLineTxt(ev) {
     line.txt = ev.target.value
 }
 
-function onSetFont(value){
+function setFont(value) {
     gMeme.lines[gMeme.selectedLineIdx].font = value
+}
+
+function changeTextColor(value) {
+    gMeme.lines[gMeme.selectedLineIdx].color = value
 }
 
 function switchLine() {
@@ -66,16 +70,16 @@ function addLine(txt, size, color) {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
-function deleteLine(){
+function deleteLine() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines.splice(lineIdx, 1)
 }
 
-function changeFontSize(diff){
+function changeFontSize(diff) {
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
 
-function setAlignment(alignDirection){
+function setAlignment(alignDirection) {
     gMeme.lines[gMeme.selectedLineIdx].alignment = alignDirection
 }
 
@@ -141,7 +145,7 @@ function _createLine(txt, size, color, font) {
         x: 250,
         y: 250,
         alignment: 'center',
-        font: font
+        font: 'arial'
     }
 
 }
