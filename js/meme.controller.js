@@ -18,7 +18,6 @@ function onSelectImg(imgId) {
 }
 
 function renderMeme() {
-    //TODO fix input focus
     const meme = getMeme()
 
     var img = new Image();
@@ -28,7 +27,7 @@ function renderMeme() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => {
-            gCtx.font = line.size + 'px arial'
+            gCtx.font = `${line.size}px ${line.font}`
             gCtx.fillStyle = line.color
             gCtx.textAlign = 'center'
             const diff = checkAlignment(line.alignment)
@@ -39,6 +38,9 @@ function renderMeme() {
         else {
             setTextBorder()
         }
+        const canvasInput = document.querySelector('.canvas-text')
+        canvasInput.focus()
+        canvasInput.placeholder = meme.lines[meme.selectedLineIdx].txt
     }
 }
 
@@ -49,10 +51,10 @@ function setTextBorder() {
     gCtx.strokeStyle = line.color
     gCtx.lineWidth = 2
 
-    //Update text measurments for inc/dec
-    gCtx.font = `${line.size}px Arial`;
-    const textMetrics = gCtx.measureText(line.txt)
+    //Update font measurments for inc/dec
+    gCtx.font = `${line.size}px ${line.font}`;
 
+    const textMetrics = gCtx.measureText(line.txt)
     const textWidth = textMetrics.width
     const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
     //Check alignment

@@ -14,7 +14,6 @@ var gImgs = []
 // ]
 
 var gMeme
-{
     // selectedImgId: 5,
     //     selectedLineIdx: 0,
     //         lines: [
@@ -29,7 +28,7 @@ var gMeme
     //                 color: 'red'
     //             }
     //         ]
-}
+
 var gKeywordSearchCountMap = {
     'funny': 12,
     'cat': 16,
@@ -49,6 +48,10 @@ function getImgs() {
 function setLineTxt(ev) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
     line.txt = ev.target.value
+}
+
+function onSetFont(value){
+    gMeme.lines[gMeme.selectedLineIdx].font = value
 }
 
 function switchLine() {
@@ -112,7 +115,8 @@ function createMeme(imgId) {
                 color: 'black',
                 x: 250,
                 y: 100,
-                alignment: 'center'
+                alignment: 'center',
+                font: 'arial'
             },
             {
                 txt: 'YOU WEIRD!',
@@ -120,7 +124,8 @@ function createMeme(imgId) {
                 color: 'black',
                 x: 250,
                 y: 400,
-                alignment: 'center'
+                alignment: 'center',
+                font: 'arial'
             }
         ]
     }
@@ -128,14 +133,15 @@ function createMeme(imgId) {
     return gMeme
 }
 
-function _createLine(txt, size, color) {
+function _createLine(txt, size, color, font) {
     return {
         txt: txt,                           //`${txt}`,
         size: size,
         color: color,
         x: 250,
         y: 250,
-        alignment: 'center'
+        alignment: 'center',
+        font: font
     }
 
 }
