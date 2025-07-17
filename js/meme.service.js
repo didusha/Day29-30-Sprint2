@@ -14,17 +14,22 @@ var gImgs = []
 // ]
 
 var gMeme
-// {
-//     selectedImgId: 5,
-//     selectedLineIdx: 0,
-//     lines: [
-//         {
-//             txt: 'I sometimes eat Falafel',
-//             size: 20,
-//             color: 'red'
-//         }
-//     ]
-// }
+{
+    // selectedImgId: 5,
+    //     selectedLineIdx: 0,
+    //         lines: [
+    //             {
+    //                 txt: 'I sometimes eat Falafel',
+    //                 size: 20,
+    //                 color: 'red'
+    //             },
+    //             {
+    //                 txt: 'I sometimes eat Falafel',
+    //                 size: 20,
+    //                 color: 'red'
+    //             }
+    //         ]
+}
 var gKeywordSearchCountMap = {
     'funny': 12,
     'cat': 16,
@@ -39,6 +44,23 @@ function getMeme() {
 
 function getImgs() {
     return gImgs
+}
+
+function switchLine() {
+    let { selectedLineIdx, lines } = gMeme
+    selectedLineIdx < lines.length - 1 ? gMeme.selectedLineIdx += 1 : gMeme.selectedLineIdx = 0
+}
+
+function addLine(txt, size, color) {
+    //TODO fix input (and input focus?)
+    const line = _createLine(txt, size, color)
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function deleteLine(){
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines.splice(lineIdx, 1)
 }
 
 function _createImgs() {
@@ -76,6 +98,13 @@ function createMeme(imgId) {
                 color: 'black',
                 x: 250,
                 y: 100,
+            },
+            {
+                txt: 'YOU WEIRD!',
+                size: 30,
+                color: 'black',
+                x: 250,
+                y: 400,
             }
         ]
     }
@@ -83,6 +112,16 @@ function createMeme(imgId) {
     return gMeme
 }
 
+function _createLine(txt, size, color) {
+    return {
+        txt: txt,                           //`${txt}`,
+        size: size,
+        color: color,
+        x: 250,
+        y: 250,
+    }
+
+}
 
 function setLineTxt(ev) {
     const line = gMeme.lines[gMeme.selectedLineIdx]

@@ -15,12 +15,11 @@ function onInit() {
 function onSelectImg(imgId) {
     createMeme(imgId)
     showEditor()
-    // renderMeme()
 }
 
 function renderMeme() {
+    //TODO fix input focus
     const meme = getMeme()
-    console.log("🚀 ~ renderMeme ~ meme:", meme)
 
     var img = new Image();
     img.src = `img/gallery/${meme.selectedImgId}.jpg`
@@ -34,8 +33,22 @@ function renderMeme() {
             gCtx.textAlign = 'center'
             gCtx.fillText(line.txt, line.x, line.y)
         })
+        if(meme.selectedLineIdx === 0) setLineBorder()
+            else{
+                setLineBorder()
+        }
     }
+}
 
+function setLineBorder() {
+    const { selectedLineIdx, lines } = getMeme()
+    // gCtx.beginPath()
+    const line = lines[selectedLineIdx]
+    gCtx.strokeStyle = line.color
+    gCtx.lineWidth = 3
+    const textWidth = gCtx.measureText(line.txt).width
+    const textHeight = line.size
+    gCtx.strokeRect(line.x - textWidth / 2 - 5, line.y - line.size, textWidth + 10, textHeight + 10)
 }
 
 //Download image 
@@ -115,8 +128,3 @@ function resizeCanvas() {
 //     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 // }
 
-// Add text on Meme
-function onDrawText(ev) {
-    setLineTxt(ev)
-    renderMeme()
-}
