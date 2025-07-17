@@ -5,7 +5,7 @@ const MEME_KEY = 'memeDB'
 const SAVED_MEME_KEY = 'savedMemesDB'
 
 
-var gImgs = []
+var gImgs
 //     {
 //         id: 1,
 //         url: 'img/1.jpg',
@@ -85,8 +85,9 @@ function setAlignment(alignDirection) {
 
 //Create functions
 function _createImgs() {
-    gImgs = loadFromStorage(IMG_KEY, gImgs)
+    // gImgs = loadFromStorage(IMG_KEY, gImgs)
     if (!gImgs || !gImgs.length) {
+        gImgs = []
         for (var i = 1; i <= 18; i++) {
             gImgs.push(
                 _createImg(
@@ -96,7 +97,7 @@ function _createImgs() {
                 )
             )
         }
-        saveToStorage(IMG_KEY, gImgs)
+        // saveToStorage(IMG_KEY, gImgs)
     }
 }
 
