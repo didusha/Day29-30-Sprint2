@@ -56,29 +56,38 @@ function onMoveText(diff) {
     renderMeme()
 }
 
+function onSaveMeme(elLink){
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    saveMeme(imgContent)
+}
+
 //Download image 
 function onDownloadImg(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
 
-//Upload to cloud
+// Upload to cloud & FB 
+
+function onUploadToFB(url) {
+    document.querySelector('.share-container').innerHTML = ''
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+}
+
 function onShare(ev) {
+
     const canvasData = gElCanvas.toDataURL('image/jpeg')
     function onSuccess(uploadedImgUrl) {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        document.querySelector('.share-container').innerHTML =
-            `<a href="${uploadedImgUrl}">Image Url</a>
+        document.querySelector('.share-container').innerHTML = `
+            <a href="${uploadedImgUrl}">Image Url</a>
             <p>Image url: ${uploadedImgUrl}</p>
+           
             <button class="btn-facebook" target="_blank" onclick="onUploadToFB('${encodedUploadedImgUrl}')">
-            Share on Facebook</button>`
+                Share on Facebook  
+            </button>
+        `
     }
     uploadImg(canvasData, onSuccess)
-}
-
-
-//upload to facebook
-function onUploadToFB(url) {
-    // console.log('url:', url)
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+    
 }

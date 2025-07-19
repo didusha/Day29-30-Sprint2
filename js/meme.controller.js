@@ -2,6 +2,7 @@
 
 var gElCanvas
 var gCtx
+var gPrevPos
 
 function onInit() {
     renderGallery()
@@ -23,7 +24,6 @@ function renderMeme() {
     var img = new Image();
     img.src = `img/gallery/${meme.selectedImgId}.jpg`
 
-    // gElCanvas.height = (gElImg.naturalHeight / gElImg.naturalWidth) * gElCanvas.width
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => {
@@ -53,14 +53,19 @@ function setTextBorder() {
 
     //Update font measurments for inc/dec
     gCtx.font = `${line.size}px ${line.font}`;
+    const diff = checkAlignment(line.alignment)
 
     const textMetrics = gCtx.measureText(line.txt)
     const textWidth = textMetrics.width
     const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
     //Check alignment
-    const diff = checkAlignment(line.alignment)
 
-    gCtx.strokeRect(line.x + diff - textWidth / 2 - 5, line.y - textMetrics.actualBoundingBoxAscent - 5, textWidth + 10, textHeight + 10)
+    const xStart = line.x + diff - textWidth / 2 - 5
+    const xEnd = textWidth + 10
+    const yStart = line.y - textMetrics.actualBoundingBoxAscent - 5
+    const yEnd = textHeight + 10
+
+    gCtx.strokeRect(xStart, yStart, xEnd, yEnd)
 }
 
 function checkAlignment(alignment) {
@@ -79,36 +84,50 @@ function checkAlignment(alignment) {
     return diff
 }
 
+function onDeleteSavedMeme(memeId){
+    console.log("memeId:", memeId)
+    deleteSavedMeme(memeId)
+    renderSavedGallery()
+}
+
+function onDown(ev) {
+    // const pos = getEvPos(ev)
+    // if (!isTextclicked(pos)) return
+    // // setTextDrag(true)
+    // gPrevPos = pos
+    // document.body.style.cursor = 'grabbing'
+}
+
+function onUp() {
+
+}
+
+function getEvPos(ev) {
+    const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    if (TOUCH_EVS.includes(ev.type)) {
+        // Prevent triggering the default mouse behavior
+        ev.preventDefault()
+        // Gets the first touch point (could be multiple in touch event)
+        ev = ev.changedTouches[0]
+        //  Calculate touch coordinates relative to canvas 
+        //  position by subtracting canvas offsets (left and top) from page coordinates
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
+}
+
 //Download image 
 function onDownloadImg(elLink) {
     // removeBorders()
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
-}
-
-// Upload to cloud & FB
-function onUploadImg(ev) {
-    ev.preventDefault()
-    const canvasData = gElCanvas.toDataURL('image/jpeg')
-
-    // After a successful upload, allow the user to share on Facebook
-    function onSuccess(uploadedImgUrl) {
-        // console.log('uploadedImgUrl:', uploadedImgUrl)
-        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        document.querySelector('.share-container').innerHTML = `
-        <a href="${uploadedImgUrl}">Image Url</a>
-        <p>Image url: ${uploadedImgUrl}</p>
-        
-        <button class="btn-facebook" target="_blank" onclick="onUploadToFB('${encodedUploadedImgUrl}')">
-        Share on Facebook  
-        </button>
-        `
-    }
-    uploadImg(canvasData, onSuccess)
-}
-
-function onShareToFB(url) {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
 
 //Render Gallery
@@ -120,25 +139,42 @@ function renderGallery() {
     elGallery.innerHTML = strGallery.join('')
 }
 
+function renderSavedGallery() {
+    const elGallery = document.querySelector('.saved-container')
+    var savedMemes = getSavedMemes()
+    if (!savedMemes.length) {
+        elGallery.innerHTML = '<p>No saved memes yet...</p>'
+        return
+    }
+    const strSaved = savedMemes.map((savedMeme, idx) =>
+        `<div class="saved-img-container">
+    <img src=${savedMeme.dataURL} alt="" onclick="onSelectImg(${savedMeme.id})" data-id="${savedMeme.id}">
+          <button class="btn btn-delete-saved" onclick="onDeleteSavedMeme(${savedMeme.id})">Delete</button>
+          </div>`)
+    elGallery.innerHTML = strSaved.join('')
+}
+
 //DOM
 function onGalleryClick() {
-    // Show Gallery
-    // document.querySelector('.gallery-container').classList.add('grid')
+    //Show Gallery
     document.querySelector('.gallery-container').classList.remove('hidden')
-    // Hide Editor
-    // document.querySelector('.main-container').classList.remove('grid')
     document.querySelector('.main-container').classList.add('hidden')
+    document.querySelector('.saved-container').classList.add('hidden')
+}
+
+function onSavedClick() {
+    //Show Gallery
+    document.querySelector('.saved-container').classList.remove('hidden')
+    document.querySelector('.gallery-container').classList.add('hidden')
+    document.querySelector('.main-container').classList.add('hidden')
+    renderSavedGallery()
 }
 
 function showEditor() {
-    // Show Editor
-    // document.querySelector('.main-container').classList.add('grid')
+    //Show Editor
     document.querySelector('.main-container').classList.remove('hidden')
-    // document.querySelector('canvas').width = 400
-    // document.querySelector('canvas').height = 400
-    // Hide Gallery
     document.querySelector('.gallery-container').classList.add('hidden')
-    // document.querySelector('.gallery-container').classList.remove('grid')
+    document.querySelector('.saved-container').classList.add('hidden')
     renderMeme()
 }
 

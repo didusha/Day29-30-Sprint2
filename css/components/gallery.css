@@ -11,3 +11,14 @@
 .gallery-container img:hover{
     outline: 5px solid var(--clrSecondary);
 }
+
+.saved-img-container{
+    position: relative;
+}
+
+.btn-delete-saved{
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+    font-size: .5rem;
+}

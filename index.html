@@ -14,21 +14,29 @@
         <nav class="main-nav">
             <ul class="clean-list flex ">
                 <li><button href="#" class="btn-nav" onclick="onGalleryClick()">Gallery</button></li>
-                <li><button href="#" class="btn-nav">Saved</button></li>
+                <li><button href="#" class="btn-nav" onclick="onSavedClick()">Saved</button></li>
             </ul>
+            <!-- <button class="btn btn-toggle-menu" onclick="toggleMenu()">
+					<div class="hamburger-lines">
+						<span class="line line1"></span>
+						<span class="line line2"></span>
+						<span class="line line3"></span>
+					</div>
+				</button> -->
         </nav>
     </header>
     <main>
         <!-- Gallery Section-->
         <section class="gallery-container grid"></section>
+        <section class="saved-container gallery-container grid hidden"></section>
 
         <!--Canvas-Editor Section-->
         <section class="main-container grid editor-layout hidden">
             <!-- Canvas -->
             <div class="canvas-container">
-                <canvas width="300" height="300"></canvas>
-                <!-- onclick="onDraw(event)" onmousedown="onDown(event)"
-                        onmouseup="onUp()" ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
+                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()"></canvas>
+                <!-- onclick="onDraw(event)" 
+                         ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
                         ontouchmove="onDraw(event)" -->
                 </canvas>
             </div>
@@ -80,18 +88,12 @@
                             class="color-picker" onchange="onChangeTextColor(event)" />
                 </div>
                 <div>
+                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme(this)">Save</a></button>
+                    <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a></button>
                     <!-- TODO Fix function -->
-                    <button class="btn btn-text" onclick="onShare(event)">Share</button>
-                    <button class="btn btn-text">
-                        <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a>
-                    </button>
-                    <button class="btn btn-text">
-                        <a href="#" onclick="onSaveMeme(this)">Save</a>
-                    </button>
+                    <button class="btn btn-text" onclick="onShare(event)" >Share</button>
+                    <div class="share-container" hidden> </div>
                 </div>
-
-
-
             </div>
         </section>
 

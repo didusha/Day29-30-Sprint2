@@ -2,25 +2,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-evenly; */
-
+    gap: 10px;
     width: 90%;
     margin: 0 auto;
-    /* border: 1px solid black; */
     border-radius: 10px;
-    gap: 10px;
     padding-block: 10px;
 }
 
 .canvas-container {
     place-self: center;
-    text-align: center;
-    max-width: 90%;
-    margin: 0 auto;
-
-    border-radius: 10px;
     gap: 10px;
+    /* width: 80vw; */
+    max-width: 90%;
+
+    margin: 0 auto;
+    border-radius: 10px;
     padding-block: 10px;
+    text-align: center;
 }
 
 input.canvas-text {
@@ -34,10 +32,6 @@ input.canvas-text {
     font-size: 1.2em;
     border: 1px solid black;
     border-radius: 10px;
-}
-
-.btn-color-picker {
-    padding-block-end: 0;
 }
 
 .btn-text {

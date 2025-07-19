@@ -7,28 +7,11 @@ const SAVED_MEME_KEY = 'savedMemesDB'
 
 
 var gImgs
-//     {
-//         id: 1,
-//         url: 'img/1.jpg',
-//         keywords: ['funny', 'cat']
-//     }
-// ]
-
 var gMeme
-// selectedImgId: 5,
-//     selectedLineIdx: 0,
-//         lines: [
-//             {
-//                 txt: 'I sometimes eat Falafel',
-//                 size: 20,
-//                 color: 'red'
-//             },
-//             {
-//                 txt: 'I sometimes eat Falafel',
-//                 size: 20,
-//                 color: 'red'
-//             }
-//         ]
+var gSavedMemes 
+_createImgs()
+_loadsavedMemes() 
+
 
 var gKeywordSearchCountMap = {
     'funny': 12,
@@ -36,14 +19,16 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
-_createImgs()
-
 function getMeme() {
     return gMeme
 }
 
 function getImgs() {
     return gImgs
+}
+
+function getSavedMemes() {
+    return gSavedMemes
 }
 
 function setLineTxt(ev) {
@@ -87,7 +72,7 @@ function addImoji(imoji) {
     gMeme.lines[gMeme.selectedLineIdx].txt += imoji
 }
 
-function moveTextUpDown(diff){
+function moveTextUpDown(diff) {
     gMeme.lines[gMeme.selectedLineIdx].y += diff
 }
 
@@ -129,7 +114,8 @@ function createMeme(imgId) {
                 x: 150,
                 y: 50,
                 alignment: 'center',
-                font: 'arial'
+                font: 'arial',
+                isDrag: false
             },
             {
                 txt: 'YOU WEIRD!',
@@ -138,7 +124,8 @@ function createMeme(imgId) {
                 x: 150,
                 y: 250,
                 alignment: 'center',
-                font: 'arial'
+                font: 'arial',
+                isDrag: false
             }
         ]
     }
@@ -157,4 +144,89 @@ function _createLine(txt, size, color, font) {
         font: 'arial'
     }
 
+}
+
+//Upload to cloud
+async function uploadImg(imgData, onSuccess) {
+    const CLOUD_NAME = 'webify'
+    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+    const formData = new FormData()
+    formData.append('file', imgData)
+    formData.append('upload_preset', 'webify')
+    try {
+        const res = await fetch(UPLOAD_URL, {
+            method: 'POST',
+            body: formData
+        })
+        const data = await res.json()
+        onSuccess(data.secure_url)
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+//Save memes to storage
+function saveMeme(imgContent) {
+    if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = []
+    const memeToSave = {
+        id: getRandomIntInclusive(1, 100),
+        dataURL: imgContent,
+        // meme: getMeme()
+    }
+    gSavedMemes.push(memeToSave)
+    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
+}
+
+function _loadsavedMemes() {
+    gSavedMemes = loadFromStorage(SAVED_MEME_KEY, gSavedMemes)
+}
+
+function deleteSavedMeme(memeId){
+    const idx = gSavedMemes.findIndex(savedMeme => savedMeme.id === memeId)
+    gSavedMemes.splice(idx, 1)
+}
+
+//Drag & Drop
+function isTextclicked(pos) {
+    console.log("clicked pos:", pos)
+    console.log("Text pos", gMeme.lines[0].x, gMeme.lines[0].y)
+
+    for (var i = 0; i < 1; i++) {
+        const line = gMeme.lines[i]
+        gCtx.strokeStyle = "red";
+
+        //Update font measurments for inc/dec
+        gCtx.font = `${line.size}px ${line.font}`;
+        const diff = checkAlignment(line.alignment)
+
+        const textMetrics = gCtx.measureText(line.txt)
+        const textWidth = textMetrics.width
+        const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
+        //Check alignment
+
+        // const xStart = line.x + diff - textWidth / 2 - 5
+        // const xEnd = xStart + textWidth + 10
+        // const width = line.y - textMetrics.actualBoundingBoxAscent - 5
+        // const height =  yStart + textHeight + 10
+
+
+        console.log(" xStart:", xStart)
+        console.log("xEnd:", xEnd)
+        console.log(" yStart:", yStart)
+        console.log(" yEnd:", yEnd)
+        console.log("check", pos.x > xStart && pos.x < xEnd && pos.y > yStart && pos.y < yEnd)
+
+        if (
+            pos.x >= xStart &&
+            pos.x <= xEnd &&
+            pos.y >= yStart &&
+            pos.y <= yEnd
+        ) {
+            line.isDrag = true;
+            return true;
+        }
+    }
+    return false
 }
