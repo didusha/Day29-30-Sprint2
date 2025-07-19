@@ -70,7 +70,7 @@ function onFlexMeme(){
         line.size = getRandomIntInclusive(10,16)
         line.font = getRandomFont()
     })
-    renderMeme
+    renderMeme()
 }
 
 //Download image 

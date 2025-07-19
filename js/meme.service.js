@@ -62,6 +62,12 @@ function deleteLine() {
     gMeme.lines.splice(lineIdx, 1)
 }
 
+function updateMeme(memeId){
+    console.log("memeId:", memeId)
+    const meme = gSavedMemes.find(savedMeme => savedMeme.id === memeId)
+    gMeme = meme.meme
+}
+
 function changeFontSize(diff) {
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }

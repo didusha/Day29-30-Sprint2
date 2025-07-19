@@ -18,8 +18,8 @@ function getRandomColor() {
 function getRandomText() {
     const txts = ['You Rock!', 'Mood right now', 'Send help pls ', 'Why like this ', 'Absolutely not okay ',
         'Nope nope nope ', 'Zero motivation today ', 'I need sleep ', 'This is fine ', 'Cant even deal ',
-        'Me, every time ']
-    const idx = getRandomIntInclusive(0, 11)
+        'Me, every time','💤', '🍭', 'My Unicorn🦄', 'Boo👻', '🙈']
+    const idx = getRandomIntInclusive(0, 16)
     const txt = txts[idx]
     return txt
 }

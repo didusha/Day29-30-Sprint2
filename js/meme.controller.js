@@ -163,16 +163,23 @@ function renderGallery() {
 function renderSavedGallery() {
     const elGallery = document.querySelector('.saved-container')
     var savedMemes = getSavedMemes()
+    console.log("savedMemes:", savedMemes)
+    
     if (!savedMemes.length) {
         elGallery.innerHTML = '<p>No saved memes yet...</p>'
         return
     }
-    const strSaved = savedMemes.map((savedMeme, idx) =>
+    const strSaved = savedMemes.map((savedMeme, idx) => 
         `<div class="saved-img-container">
-    <img src=${savedMeme.dataURL} alt="" onclick="onSelectImg(${savedMeme.id})" data-id="${savedMeme.id}">
+         <img src=${savedMeme.dataURL} alt="" onclick="onSelectSavedMeme(${savedMeme.id})" data-id="${savedMeme.meme}">
           <button class="btn btn-delete-saved" onclick="onDeleteSavedMeme(${savedMeme.id})">Delete</button>
           </div>`)
     elGallery.innerHTML = strSaved.join('')
+}
+
+function onSelectSavedMeme(memeId){
+    updateMeme(memeId)
+    showEditor()
 }
 
 //DOM
