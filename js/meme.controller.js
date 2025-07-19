@@ -246,11 +246,11 @@ function renderImg(elImg) {
     renderGallery()
 }
 
-//Resize Canvas
-// function resizeCanvas() {
-//     const elContainer = document.querySelector('.canvas-container')
-//     gElCanvas.width = elContainer.offsetWidth
-//     gElCanvas.height = elContainer.offsetHeight
-//     // var meme = getMeme()
-//     // renderMeme(meme)
-// }
+//Language
+function onChangeLang(elSelect){
+    const lang = elSelect.value
+    if(lang === 'Heb')
+        window.location.href = 'index-heb.html'
+    if(lang === 'Eng')
+        window.location.href = 'index.html'
+}

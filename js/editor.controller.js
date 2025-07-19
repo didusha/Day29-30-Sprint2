@@ -34,7 +34,6 @@ function onSetAlignment(alignDirection) {
 }
 
 function onSetFont(elInput) {
-    //TODO check this function
     let value = elInput.value
     setFont(value)
     renderMeme()
@@ -71,7 +70,7 @@ function onFlexMeme(){
     meme.lines.forEach(line => {
         line.txt = getRandomText()
         line.color = getRandomColor()
-        line.size = getRandomIntInclusive(10,16)
+        line.size = getRandomIntInclusive(16,30)
         line.font = getRandomFont()
     })
     renderMeme()

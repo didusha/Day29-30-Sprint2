@@ -241,3 +241,4 @@ function setisDrag() {
     gMeme.lines.forEach(line => line.isDrag = false)
 }
 
+

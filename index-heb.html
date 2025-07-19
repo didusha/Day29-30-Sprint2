@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/apps.css">
+    <link rel="stylesheet" href="css/components/main-header-heb.css">
     <title>Document</title>
 </head>
 
@@ -13,13 +14,13 @@
         <h1><img src="img/LOGO.png" class="logo"></h1>
         <nav class="main-nav">
             <ul class="nav-bar clean-list flex">
-                <li><button href="#" class="btn-nav" onclick="onGalleryClick()">Gallery</button></li>
-                <li><button href="#" class="btn-nav" onclick="onSavedClick()">Saved</button></li>
+                <li><button href="#" class="btn-nav" onclick="onGalleryClick()">גלריה</button></li>
+                <li><button href="#" class="btn-nav" onclick="onSavedClick()">שמורות</button></li>
             </ul>
             <button class="btn-toggle-menu" type="button" onclick="toggleMenu()">☰</button>
             <select class="lang-picker" name="lang-picker" onchange="onChangeLang(this)">
-                <option value="Eng" selected>Eng</option>
-                <option value="Heb">Heb</option>
+                <option value="Eng">Eng</option>
+                <option value="Heb" selected>Heb</option>
             </select>
         </nav>
     </header>
@@ -92,7 +93,7 @@
                         </label>
                         <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
                             class="color-picker" onchange="onChangeTextColor(event)" />
-                        <button class="btn btn-text btn-flexible" onclick="onFlexMeme()">I'm Flexible</button>
+                        <button class="btn btn-text btn-flexible" onclick="onFlexMeme()">תפתיע אותי</button>
                         <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
                             <option value="arial">Arial</option>
                             <option value="impact">Impact</option>
@@ -100,10 +101,10 @@
                         </select>
                 </div>
                 <div>
-                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme()">Save</a></button>
+                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme()">שמור</a></button>
                     <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)"
-                            download="meme.jpg">Download</a></button>
-                    <button class="btn btn-text" onclick="onShare(event)">Share</button>
+                            download="meme.jpg">הורד</a></button>
+                    <button class="btn btn-text" onclick="onShare(event)">שתף</button>
                     <div class="share-container" hidden> </div>
                 </div>
             </div>
