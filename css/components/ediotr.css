@@ -12,7 +12,6 @@
 .canvas-container {
     place-self: center;
     gap: 10px;
-    /* width: 80vw; */
     max-width: 90%;
 
     margin: 0 auto;
@@ -49,6 +48,7 @@ input.canvas-text {
 }
 
 .btn-text a {
+    padding-block: 0;
     text-decoration: none;
     color: black;
 }
@@ -60,3 +60,4 @@ input.canvas-text {
 div.fix {
     gap: 5px;
 }
+

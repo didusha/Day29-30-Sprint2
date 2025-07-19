@@ -200,9 +200,8 @@ function isTextclicked(pos) {
 
     for (var i = 0; i < gMeme.lines.length; i++) {
         const line = gMeme.lines[i]
-        gCtx.strokeStyle = "red";
         //Update font measurments for inc/dec
-        gCtx.font = `${line.size}px ${line.font}`;
+        // gCtx.font = `${line.size}px ${line.font}`;
         //Check alignment
         const diff = checkAlignment(line.alignment)
         console.log("diff:", diff)

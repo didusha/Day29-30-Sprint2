@@ -21,12 +21,19 @@
     </header>
     <main>
         <!-- Gallery Section-->
-        <!-- <div class="gallery-bar">
-            <input class="img-filter" type="text" placeholder="" oninput="onFilterImages(event)" />
-            <input onchange="onImgInput(event)" type="file" accept=".jpg, .jpeg, .png, .webp" class="btn btn-file-input"
+        <div class="gallery-bar">
+            <input list="Topics" class="img-filter" placeholder= " Search.." name="browser" id="browser">
+            <datalist id="Topics">
+                <option value="Funny">
+                <option value="Sarcatic">
+                <option value="Bad">
+                <option value="Akward">
+                <option value="Animal">
+            </datalist>
+            <!-- <input onchange="onImgInput(event)" type="file" accept=".jpg, .jpeg, .png, .webp" class="btn btn-file-input"
                 id="file-input" name="image" />
-            <div class="file-name" id="file-name"></div>
-        </div> -->
+            <div class="file-name" id="file-name"></div> -->
+        </div>
         <section class="gallery-container grid">
         </section>
         <section class="saved-container gallery-container grid hidden"></section>
@@ -35,8 +42,9 @@
         <section class="main-container grid editor-layout hidden">
             <!-- Canvas -->
             <div class="canvas-container">
-                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onMove(event)"
-                ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onMove(event)"></canvas>
+                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()"
+                    onmousemove="onMove(event)" ontouchstart="onDown(event)" ontouchend="onUp()"
+                    ontouchmove="onMove(event)"></canvas>
                 </canvas>
             </div>
             <!-- Editor -->
@@ -74,17 +82,18 @@
                     <button class="btn emoji" onclick="onAddEmoji('🥳')">🥳</button>
                 </div>
                 <div class="flex fix">
-                    <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
-                        <option value="arial">Arial</option>
-                        <option value="impact">Impact</option>
-                        <option value="verdana">Verdana</option>
-                    </select>
                     <button class="btn btn-color-picker">
                         <label for="color-picker">
                             <img class="color-picker" src="img/Icons/paint-board-and-brush.png">
                         </label>
                         <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
                             class="color-picker" onchange="onChangeTextColor(event)" />
+                        <button class="btn btn-text btn-flexible" onclick="onFlexMeme()">I'm Flexible</button>
+                        <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
+                            <option value="arial">Arial</option>
+                            <option value="impact">Impact</option>
+                            <option value="verdana">Verdana</option>
+                        </select>
                 </div>
                 <div>
                     <button class="btn btn-text"><a href="#" onclick="onSaveMeme(this)">Save</a></button>

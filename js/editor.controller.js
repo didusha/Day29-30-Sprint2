@@ -61,6 +61,18 @@ function onSaveMeme(elLink){
     saveMeme(imgContent)
 }
 
+function onFlexMeme(){
+    onSelectImg(getRandomIntInclusive(1,18))
+    const meme = getMeme()
+    meme.lines.forEach(line => {
+        line.txt = getRandomText()
+        line.color = getRandomColor()
+        line.size = getRandomIntInclusive(10,16)
+        line.font = getRandomFont()
+    })
+    renderMeme
+}
+
 //Download image 
 function onDownloadImg(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg')
