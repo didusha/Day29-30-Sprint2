@@ -13,8 +13,8 @@
 }
 
 .logo {
-	max-width: 200px;
-	min-width: 10rem;
+	max-width: 50%;
+	min-width: 6rem;
 }
 
 .btn-nav {
@@ -29,7 +29,7 @@
 /* hamgurger Menu */
 .main-nav {
 	position: fixed;
-	right: 20px;
+	right: 10px;
 	width: max-content;
 }
 

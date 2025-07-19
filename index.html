@@ -21,27 +21,32 @@
     </header>
     <main>
         <!-- Gallery Section-->
-        <section class="gallery-container grid"></section>
+        <!-- <div class="gallery-bar">
+            <input class="img-filter" type="text" placeholder="" oninput="onFilterImages(event)" />
+            <input onchange="onImgInput(event)" type="file" accept=".jpg, .jpeg, .png, .webp" class="btn btn-file-input"
+                id="file-input" name="image" />
+            <div class="file-name" id="file-name"></div>
+        </div> -->
+        <section class="gallery-container grid">
+        </section>
         <section class="saved-container gallery-container grid hidden"></section>
 
         <!--Canvas-Editor Section-->
         <section class="main-container grid editor-layout hidden">
             <!-- Canvas -->
             <div class="canvas-container">
-                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()"></canvas>
-                <!-- onclick="onDraw(event)" 
-                         ontouchstart="onDown(event)" ontouchend="onUp()" onmousemove="onDraw(event)">
-                        ontouchmove="onDraw(event)" -->
+                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onMove(event)"
+                ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onMove(event)"></canvas>
                 </canvas>
             </div>
             <!-- Editor -->
             <div class="editor-container">
                 <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
                 <div>
-                    <button class="btn btn-increase-font" onclick="onMoveText(-1)"><img
-                            src="img/icons/up-arrow.png" alt=""></button>
-                    <button class="btn btn-decrease-font" onclick="onMoveText(1)"><img
-                            src="img/icons/down-arrow.png" alt=""></button>
+                    <button class="btn btn-increase-font" onclick="onMoveText(-1)"><img src="img/icons/up-arrow.png"
+                            alt=""></button>
+                    <button class="btn btn-decrease-font" onclick="onMoveText(1)"><img src="img/icons/down-arrow.png"
+                            alt=""></button>
                     <button class="btn btn-switch-line" onclick="onSwitchLine()"><img
                             src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
                     <button class="btn add-line" onclick="onAddLine()"><img src="img/icons/add.png" alt=""></button>
@@ -83,9 +88,9 @@
                 </div>
                 <div>
                     <button class="btn btn-text"><a href="#" onclick="onSaveMeme(this)">Save</a></button>
-                    <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)" download="meme.jpg">Download</a></button>
-                    <!-- TODO Fix function -->
-                    <button class="btn btn-text" onclick="onShare(event)" >Share</button>
+                    <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)"
+                            download="meme.jpg">Download</a></button>
+                    <button class="btn btn-text" onclick="onShare(event)">Share</button>
                     <div class="share-container" hidden> </div>
                 </div>
             </div>

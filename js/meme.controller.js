@@ -4,6 +4,7 @@ var gElCanvas
 var gCtx
 var gPrevPos
 var gIsOpen = false
+var gIsMouseDown = false
 
 function onInit() {
     renderGallery()
@@ -30,7 +31,7 @@ function renderMeme() {
         meme.lines.forEach((line, idx) => {
             gCtx.font = `${line.size}px ${line.font}`
             gCtx.fillStyle = line.color
-            gCtx.textAlign = 'center'
+            // gCtx.textAlign = 'center'
             const diff = checkAlignment(line.alignment)
 
             gCtx.fillText(line.txt, line.x + diff, line.y)
@@ -61,7 +62,7 @@ function setTextBorder() {
     const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
     //Check alignment
 
-    const xStart = line.x + diff - textWidth / 2 - 5
+    const xStart = line.x + diff - 5
     const xEnd = textWidth + 10
     const yStart = line.y - textMetrics.actualBoundingBoxAscent - 5
     const yEnd = textHeight + 10
@@ -73,7 +74,7 @@ function checkAlignment(alignment) {
     let diff
     switch (alignment) {
         case 'left':
-            diff = -100
+            diff = -90
             break
         case 'center':
             diff = 0
@@ -92,15 +93,34 @@ function onDeleteSavedMeme(memeId) {
 }
 
 function onDown(ev) {
-    // const pos = getEvPos(ev)
-    // if (!isTextclicked(pos)) return
-    // // setTextDrag(true)
-    // gPrevPos = pos
-    // document.body.style.cursor = 'grabbing'
+    gIsMouseDown = true
+    const pos = getEvPos(ev)
+    if (!isTextclicked(pos)) return
+    gPrevPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+    if (!gIsMouseDown) return
+    const { lines } = getMeme()
+    lines.forEach(line => {
+        if (!line.isDrag) return
+    })
+    const pos = getEvPos(ev)
+    //* Calculate distance moved from drag start position
+    const dx = pos.x - gPrevPos.x
+    const dy = pos.y - gPrevPos.y
+    setNewLinePos(dx, dy)
+    //* Update prev position for next move calculation
+    gPrevPos = pos
+    //* Redraw the canvas with updated meme position
+    renderMeme()
 }
 
 function onUp() {
-
+    gIsMouseDown = false
+    setisDrag()
+    document.body.style.cursor = 'default'
 }
 
 function getEvPos(ev) {
@@ -179,23 +199,43 @@ function showEditor() {
     renderMeme()
 }
 
-//Resize Canvas
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
-    // var meme = getMeme()
-    // renderMeme(meme)
-}
-
 function toggleMenu() {
     gIsOpen = !gIsOpen
     document.querySelector('.nav-bar').classList.toggle('menu-open')
     if (gIsOpen) document.querySelector('.btn-toggle-menu').innerHTML = 'X'
     else document.querySelector('.btn-toggle-menu').innerHTML = '☰'
 }
-//clear Canvas
-// function onClearCanvas() {
-//     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
-// }
 
+//TODO fix functions
+// Upload image -  next 2 functions handle IMAGE UPLOADING to img tag from file system: 
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    document.querySelector('.share-container').innerHTML = ''
+    const reader = new FileReader()
+
+    reader.onload = (event) => {
+        _createImg(event.target.result)
+        const img = new Image()
+        img.src = event.target.result
+        img.onload = () => {
+            onImageReady(img)
+        }
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function renderImg(elImg) {
+    renderGallery()
+}
+
+//Resize Canvas
+// function resizeCanvas() {
+//     const elContainer = document.querySelector('.canvas-container')
+//     gElCanvas.width = elContainer.offsetWidth
+//     gElCanvas.height = elContainer.offsetHeight
+//     // var meme = getMeme()
+//     // renderMeme(meme)
+// }

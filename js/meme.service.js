@@ -8,9 +8,11 @@ const SAVED_MEME_KEY = 'savedMemesDB'
 
 var gImgs
 var gMeme
-var gSavedMemes 
+var gSavedMemes
+var gmemeId = 100
+var gImgId = 20
 _createImgs()
-_loadsavedMemes() 
+_loadsavedMemes()
 
 
 var gKeywordSearchCountMap = {
@@ -95,11 +97,13 @@ function _createImgs() {
 }
 
 function _createImg(id, url, keywords) {
-    return {
-        id,
+    const img = {
+        id: gImgId++,
         url,
         keywords,
     }
+    gImgs.push(img)
+    return img
 }
 
 function createMeme(imgId) {
@@ -111,7 +115,7 @@ function createMeme(imgId) {
                 txt: 'YOU ROCK!',
                 size: 15,
                 color: 'black',
-                x: 150,
+                x: 100,
                 y: 50,
                 alignment: 'center',
                 font: 'arial',
@@ -121,7 +125,7 @@ function createMeme(imgId) {
                 txt: 'YOU WEIRD!',
                 size: 15,
                 color: 'black',
-                x: 150,
+                x: 100,
                 y: 250,
                 alignment: 'center',
                 font: 'arial',
@@ -171,9 +175,9 @@ async function uploadImg(imgData, onSuccess) {
 function saveMeme(imgContent) {
     if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = []
     const memeToSave = {
-        id: getRandomIntInclusive(1, 100),
+        id: gmemeId++,
         dataURL: imgContent,
-        // meme: getMeme()
+        meme: gMeme
     }
     gSavedMemes.push(memeToSave)
     saveToStorage(SAVED_MEME_KEY, gSavedMemes)
@@ -183,9 +187,10 @@ function _loadsavedMemes() {
     gSavedMemes = loadFromStorage(SAVED_MEME_KEY, gSavedMemes)
 }
 
-function deleteSavedMeme(memeId){
+function deleteSavedMeme(memeId) {
     const idx = gSavedMemes.findIndex(savedMeme => savedMeme.id === memeId)
     gSavedMemes.splice(idx, 1)
+    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
 }
 
 //Drag & Drop
@@ -193,40 +198,40 @@ function isTextclicked(pos) {
     console.log("clicked pos:", pos)
     console.log("Text pos", gMeme.lines[0].x, gMeme.lines[0].y)
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < gMeme.lines.length; i++) {
         const line = gMeme.lines[i]
         gCtx.strokeStyle = "red";
-
         //Update font measurments for inc/dec
         gCtx.font = `${line.size}px ${line.font}`;
+        //Check alignment
         const diff = checkAlignment(line.alignment)
+        console.log("diff:", diff)
 
         const textMetrics = gCtx.measureText(line.txt)
         const textWidth = textMetrics.width
         const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
-        //Check alignment
 
-        // const xStart = line.x + diff - textWidth / 2 - 5
-        // const xEnd = xStart + textWidth + 10
-        // const width = line.y - textMetrics.actualBoundingBoxAscent - 5
-        // const height =  yStart + textHeight + 10
+        const xStart = line.x - diff - 10
+        const xEnd = xStart + textWidth - 10
+        const yStart = line.y - textMetrics.actualBoundingBoxAscent - 10
+        const yEnd = yStart + textHeight + 10
 
-
-        console.log(" xStart:", xStart)
-        console.log("xEnd:", xEnd)
-        console.log(" yStart:", yStart)
-        console.log(" yEnd:", yEnd)
-        console.log("check", pos.x > xStart && pos.x < xEnd && pos.y > yStart && pos.y < yEnd)
-
-        if (
-            pos.x >= xStart &&
-            pos.x <= xEnd &&
-            pos.y >= yStart &&
-            pos.y <= yEnd
-        ) {
+        if (pos.x >= xStart && pos.x <= xEnd &&
+            pos.y >= yStart && pos.y <= yEnd) {
             line.isDrag = true;
             return true;
         }
     }
     return false
+}
+
+function setNewLinePos(dx, dy) {
+    const LineId = gMeme.lines.findIndex(line => line.isDrag)
+    gMeme.lines[LineId].x += dx
+    gMeme.lines[LineId].y += dy
+
+}
+
+function setisDrag() {
+    gMeme.lines.forEach(line => line.isDrag = false)
 }

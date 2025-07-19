@@ -7,21 +7,33 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    .logo {
+        margin-right: 20px;
+    }
 }
 
-@media (min-width: 640px) {}
+@media (min-width: 640px) {
+    .div.gallery-bar {
+        flex-direction: row;
+    }
+}
 
-
-@media (min-width: 650px) {
+@media (min-width: 750px) {
     .editor-layout {
         grid-template-columns: repeat(2, minmax(auto, 1fr))
     }
 
-    .nav-bar{
+    .logo {
+        max-width: 200px;
+    }
+
+    .nav-bar {
         opacity: 1;
     }
-    .btn-toggle-menu{
-        display: none;;
+
+    .btn-toggle-menu {
+        display: none;
     }
 }
 
