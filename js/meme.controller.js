@@ -192,7 +192,7 @@ function onSelectSavedMeme(memeId) {
 function onGalleryClick() {
     //Show Gallery
     document.querySelector('.gallery-container').classList.remove('hidden')
-    document.querySelector('.filter-bar').style.display = 'flex'
+    // document.querySelector('.filter-bar').style.display = 'flex'
     document.querySelector('.main-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
 }
@@ -210,7 +210,7 @@ function showEditor() {
     document.querySelector('.main-container').classList.remove('hidden')
     document.querySelector('.gallery-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
-    document.querySelector('.filter-bar').style.display = 'none'
+    // document.querySelector('.filter-bar').style.display = 'none'
     renderMeme()
 }
 
@@ -246,7 +246,7 @@ function renderImg(elImg) {
     renderGallery()
 }
 
-//Language
+//Change language
 function onChangeLang(elSelect){
     const lang = elSelect.value
     if(lang === 'Heb')

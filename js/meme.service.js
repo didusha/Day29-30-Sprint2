@@ -5,7 +5,6 @@ const TEST = 'test'
 const MEME_KEY = 'memeDB'
 const SAVED_MEME_KEY = 'savedMemesDB'
 
-
 var gImgs
 var gMeme
 var gSavedMemes
@@ -106,7 +105,7 @@ function _createImg(url, keywords) {
     const img = {
         id: gImgId++,
         url,
-        keywords: addKeywords() ,
+        keywords: addKeywords(),
     }
     gImgs.push(img)
     return img

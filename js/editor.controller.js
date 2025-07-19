@@ -55,7 +55,7 @@ function onMoveText(diff) {
     renderMeme()
 }
 
-//TODO fix remove border trigger
+//TODO fix trigger for remove border 
 function onSaveMeme(){
     gToRemoveBorders = true
     renderMeme()
