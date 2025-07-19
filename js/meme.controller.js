@@ -3,6 +3,7 @@
 var gElCanvas
 var gCtx
 var gPrevPos
+var gIsOpen = false
 
 function onInit() {
     renderGallery()
@@ -84,7 +85,7 @@ function checkAlignment(alignment) {
     return diff
 }
 
-function onDeleteSavedMeme(memeId){
+function onDeleteSavedMeme(memeId) {
     console.log("memeId:", memeId)
     deleteSavedMeme(memeId)
     renderSavedGallery()
@@ -187,6 +188,12 @@ function resizeCanvas() {
     // renderMeme(meme)
 }
 
+function toggleMenu() {
+    gIsOpen = !gIsOpen
+    document.querySelector('.nav-bar').classList.toggle('menu-open')
+    if (gIsOpen) document.querySelector('.btn-toggle-menu').innerHTML = 'X'
+    else document.querySelector('.btn-toggle-menu').innerHTML = '☰'
+}
 //clear Canvas
 // function onClearCanvas() {
 //     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)

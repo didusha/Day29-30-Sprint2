@@ -2,14 +2,26 @@
 /* medium: 960px */
 /* small: 740px */
 
-@media (max-width: 640px) {}
+@media (max-width: 640px) {
+    .main-nav>ul {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
 
 @media (min-width: 640px) {}
 
 
-@media (min-width: 750px) {
+@media (min-width: 650px) {
     .editor-layout {
         grid-template-columns: repeat(2, minmax(auto, 1fr))
+    }
+
+    .nav-bar{
+        opacity: 1;
+    }
+    .btn-toggle-menu{
+        display: none;;
     }
 }
 
