@@ -70,7 +70,6 @@ function onDownloadImg(elLink) {
 // Upload to cloud & FB 
 
 function onUploadToFB(url) {
-    document.querySelector('.share-container').innerHTML = ''
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
 
@@ -79,14 +78,7 @@ function onShare(ev) {
     const canvasData = gElCanvas.toDataURL('image/jpeg')
     function onSuccess(uploadedImgUrl) {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        document.querySelector('.share-container').innerHTML = `
-            <a href="${uploadedImgUrl}">Image Url</a>
-            <p>Image url: ${uploadedImgUrl}</p>
-           
-            <button class="btn-facebook" target="_blank" onclick="onUploadToFB('${encodedUploadedImgUrl}')">
-                Share on Facebook  
-            </button>
-        `
+        onUploadToFB(encodedUploadedImgUrl)
     }
     uploadImg(canvasData, onSuccess)
     
