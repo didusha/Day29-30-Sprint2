@@ -31,14 +31,15 @@ canvas {
     font-size: 2rem;
     font-weight: 600;
     width: 3.3rem;
-    /* border: 1px solid black; */
     border: none;
     border-radius: 8px;
     cursor: pointer;
     background-color: white;
+    transition: transform 0.2s ease;
 }
 
 .btn:hover {
     outline: 3px solid var(--clrPrimary);
     border-color: white;
+    transform: translateY(-2px);
 }

@@ -5,6 +5,7 @@ var gCtx
 var gPrevPos
 var gIsOpen = false
 var gIsMouseDown = false
+var gToRemoveBorders = false
 
 function onInit() {
     renderGallery()
@@ -14,7 +15,6 @@ function onInit() {
     // window.addEventListener('resize', resizeCanvas)
 }
 
-// Render Meme
 function onSelectImg(imgId) {
     createMeme(imgId)
     showEditor()
@@ -28,22 +28,29 @@ function renderMeme() {
 
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        meme.lines.forEach((line, idx) => {
-            gCtx.font = `${line.size}px ${line.font}`
-            gCtx.fillStyle = line.color
-            // gCtx.textAlign = 'center'
-            const diff = checkAlignment(line.alignment)
+        renderLines(meme)
 
-            gCtx.fillText(line.txt, line.x + diff, line.y)
-        })
-        if (meme.selectedLineIdx === 0) setTextBorder()
-        else {
-            setTextBorder()
+        if (!gToRemoveBorders) {
+            if (meme.selectedLineIdx === 0) setTextBorder()
+            else {
+                setTextBorder()
+            }
         }
         const canvasInput = document.querySelector('.canvas-text')
         canvasInput.focus()
         canvasInput.placeholder = meme.lines[meme.selectedLineIdx].txt
     }
+}
+
+function renderLines(meme) {
+    meme.lines.forEach((line, idx) => {
+        gCtx.font = `${line.size}px ${line.font}`
+        gCtx.fillStyle = line.color
+        // gCtx.textAlign = 'center'
+        const diff = checkAlignment(line.alignment)
+
+        gCtx.fillText(line.txt, line.x + diff, line.y)
+    })
 }
 
 function setTextBorder() {
@@ -146,7 +153,6 @@ function getEvPos(ev) {
 
 //Download image 
 function onDownloadImg(elLink) {
-    // removeBorders()
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
@@ -164,12 +170,12 @@ function renderSavedGallery() {
     const elGallery = document.querySelector('.saved-container')
     var savedMemes = getSavedMemes()
     console.log("savedMemes:", savedMemes)
-    
+
     if (!savedMemes.length) {
         elGallery.innerHTML = '<p>No saved memes yet...</p>'
         return
     }
-    const strSaved = savedMemes.map((savedMeme, idx) => 
+    const strSaved = savedMemes.map((savedMeme, idx) =>
         `<div class="saved-img-container">
          <img src=${savedMeme.dataURL} alt="" onclick="onSelectSavedMeme(${savedMeme.id})" data-id="${savedMeme.meme}">
           <button class="btn btn-delete-saved" onclick="onDeleteSavedMeme(${savedMeme.id})">Delete</button>
@@ -177,7 +183,7 @@ function renderSavedGallery() {
     elGallery.innerHTML = strSaved.join('')
 }
 
-function onSelectSavedMeme(memeId){
+function onSelectSavedMeme(memeId) {
     updateMeme(memeId)
     showEditor()
 }
@@ -186,6 +192,7 @@ function onSelectSavedMeme(memeId){
 function onGalleryClick() {
     //Show Gallery
     document.querySelector('.gallery-container').classList.remove('hidden')
+    document.querySelector('.filter-bar').style.display = 'flex'
     document.querySelector('.main-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
 }
@@ -203,6 +210,7 @@ function showEditor() {
     document.querySelector('.main-container').classList.remove('hidden')
     document.querySelector('.gallery-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
+    document.querySelector('.filter-bar').style.display = 'none'
     renderMeme()
 }
 

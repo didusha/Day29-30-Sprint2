@@ -21,7 +21,7 @@
     </header>
     <main>
         <!-- Gallery Section-->
-        <div class="gallery-bar">
+        <div class="gallery-bar filter-bar">
             <input list="Topics" class="img-filter" placeholder= " Search.." name="browser" id="browser">
             <datalist id="Topics">
                 <option value="Funny">
@@ -96,7 +96,7 @@
                         </select>
                 </div>
                 <div>
-                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme(this)">Save</a></button>
+                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme()">Save</a></button>
                     <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)"
                             download="meme.jpg">Download</a></button>
                     <button class="btn btn-text" onclick="onShare(event)">Share</button>
@@ -106,9 +106,6 @@
         </section>
 
     </main>
-    <!-- <footer class="main-footer fixed">
-        <small>All rights reserved 2025</small>
-    </footer> -->
 
     <script src="js/meme.utils.js"></script>
     <script src="js/storage.service.js"></script>

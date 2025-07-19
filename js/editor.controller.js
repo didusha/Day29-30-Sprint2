@@ -14,7 +14,7 @@ function onSwitchLine() {
 }
 
 function onAddLine() {
-    addLine('Type something..', 30, 'black')
+    addLine('Type...', 30, 'black')
     renderMeme()
 }
 
@@ -56,9 +56,13 @@ function onMoveText(diff) {
     renderMeme()
 }
 
-function onSaveMeme(elLink){
+//TODO fix remove border trigger
+function onSaveMeme(){
+    gToRemoveBorders = true
+    renderMeme()
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     saveMeme(imgContent)
+    gToRemoveBorders = false
 }
 
 function onFlexMeme(){

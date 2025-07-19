@@ -24,6 +24,14 @@
         grid-template-columns: repeat(2, minmax(auto, 1fr))
     }
 
+    .editor-container{
+        margin-left: 0;
+    }
+
+    .gallery-container{
+        margin-right: 0;
+    }
+
     .logo {
         max-width: 200px;
     }

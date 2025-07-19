@@ -18,8 +18,8 @@ function getRandomColor() {
 function getRandomText() {
     const txts = ['You Rock!', 'Mood right now', 'Send help pls ', 'Why like this ', 'Absolutely not okay ',
         'Nope nope nope ', 'Zero motivation today ', 'I need sleep ', 'This is fine ', 'Cant even deal ',
-        'Me, every time','💤', '🍭', 'My Unicorn🦄', 'Boo👻', '🙈']
-    const idx = getRandomIntInclusive(0, 16)
+        'Me, every time', '💤', '🍭', 'My Unicorn🦄', 'Boo👻', '🙈']
+    const idx = getRandomIntInclusive(0, 15)
     const txt = txts[idx]
     return txt
 }
@@ -31,4 +31,13 @@ function getRandomFont() {
     const idx = getRandomIntInclusive(0, 11)
     const font = fonts[idx]
     return font
+}
+
+function addKeywords() {
+    const keywords = []
+    const categories = ['fanny', 'Bad', 'Sarcastic', 'Akward', 'Animal']
+    const idx = getRandomIntInclusive(0, 4)
+    keywords.push(categories.splice(idx, 1))
+    keywords.push(categories.splice(idx, 1))
+    return keywords
 }

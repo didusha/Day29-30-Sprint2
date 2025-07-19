@@ -62,7 +62,7 @@ function deleteLine() {
     gMeme.lines.splice(lineIdx, 1)
 }
 
-function updateMeme(memeId){
+function updateMeme(memeId) {
     console.log("memeId:", memeId)
     const meme = gSavedMemes.find(savedMeme => savedMeme.id === memeId)
     gMeme = meme.meme
@@ -77,7 +77,7 @@ function setAlignment(alignDirection) {
 }
 
 function addImoji(imoji) {
-    gMeme.lines[gMeme.selectedLineIdx].txt += imoji
+    addLine(imoji, 30, 'black')
 }
 
 function moveTextUpDown(diff) {
@@ -102,11 +102,11 @@ function _createImgs() {
     }
 }
 
-function _createImg(id, url, keywords) {
+function _createImg(url, keywords) {
     const img = {
         id: gImgId++,
         url,
-        keywords,
+        keywords: addKeywords() ,
     }
     gImgs.push(img)
     return img
@@ -143,15 +143,15 @@ function createMeme(imgId) {
     return gMeme
 }
 
-function _createLine(txt, size, color, font) {
+function _createLine(txt, size = 15, color, font) {
     return {
         txt: txt,
-        size: 15,
+        size: size,
         color: color,
         x: 150,
         y: 150,
         alignment: 'center',
-        font: 'arial'
+        font: 'arial',
     }
 
 }
@@ -240,3 +240,4 @@ function setNewLinePos(dx, dy) {
 function setisDrag() {
     gMeme.lines.forEach(line => line.isDrag = false)
 }
+
