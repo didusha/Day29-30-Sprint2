@@ -1,5 +1,8 @@
 .main-nav {
+    display: flex;
     flex-direction: row-reverse;
+    position: absolute;
+    left: 0;
 }
 
 .logo {
@@ -8,8 +11,9 @@
     margin-right: 0;
 }
 
-.main-nav {
-    display: flex;
-    position: absolute;
-    left: 0;
+.lang-picker {
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
 }

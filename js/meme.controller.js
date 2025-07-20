@@ -182,24 +182,24 @@ function onSelectSavedMeme(memeId) {
 //DOM
 function onGalleryClick() {
     //Show Gallery
-    document.querySelector('.gallery-container').classList.remove('hidden')
-    document.querySelector('.main-container').classList.add('hidden')
-    document.querySelector('.saved-container').classList.add('hidden')
+    document.querySelector('.gallery-wrap').classList.remove('hidden')
+    document.querySelector('.editor-wrap').classList.add('hidden')
+    document.querySelector('.saved-wrap').classList.add('hidden')
 }
 
 function onSavedClick() {
     //Show Gallery
-    document.querySelector('.saved-container').classList.remove('hidden')
-    document.querySelector('.gallery-container').classList.add('hidden')
-    document.querySelector('.main-container').classList.add('hidden')
+    document.querySelector('.saved-wrap').classList.remove('hidden')
+    document.querySelector('.gallery-wrap').classList.add('hidden')
+    document.querySelector('.editor-wrap').classList.add('hidden')
     renderSavedGallery()
 }
 
 function showEditor() {
     //Show Editor
-    document.querySelector('.main-container').classList.remove('hidden')
-    document.querySelector('.gallery-container').classList.add('hidden')
-    document.querySelector('.saved-container').classList.add('hidden')
+    document.querySelector('.editor-wrap').classList.remove('hidden')
+    document.querySelector('.gallery-wrap').classList.add('hidden')
+    document.querySelector('.saved-wrap').classList.add('hidden')
     renderMeme()
 }
 
@@ -238,6 +238,6 @@ function renderImg(elImg) {
 //Change language
 function onChangeLang(elSelect) {
     const lang = elSelect.value
-    if (lang === 'Heb') window.location.href = 'index-heb.html'
-    if (lang === 'Eng') window.location.href = 'index.html'
+    if (lang === 'heb') window.location.href = 'index-heb.html'
+    else if (lang === 'eng') window.location.href = 'index.html'
 }

@@ -1,14 +1,6 @@
-/* grid helpers */
-.grid {
-    display: grid;
-}
-
-.grid.align-center {
-    align-items: center;
-}
-
-.grid.space-between {
-    justify-content: space-between;
+/* display helpers */
+.hidden {
+    display: none;
 }
 
 /* flex helpers  */
@@ -24,18 +16,9 @@
     align-items: center;
 }
 
-.flex.wrap{
-    flex-wrap: wrap;
-}
-
 /* list helpers */
 .clean-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
-}
-
-/* display helpers */
-.hidden {
-    display: none;
 }

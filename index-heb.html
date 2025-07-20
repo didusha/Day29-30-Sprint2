@@ -9,114 +9,120 @@
     <title>Document</title>
 </head>
 
-<body onload="onInit()" class="">
+<body onload="onInit()">
     <header class="main-header flex space-between align-center ">
-        <h1><img src="img/LOGO.png" class="logo"></h1>
+        <h1><img src="img/logo.png" class="logo"></h1>
         <nav class="main-nav">
             <ul class="nav-bar clean-list flex">
-                <li><button href="#" class="btn-nav" onclick="onGalleryClick()">גלריה</button></li>
-                <li><button href="#" class="btn-nav" onclick="onSavedClick()">שמורות</button></li>
+                <li><button class="btn-nav" onclick="onGalleryClick()">גלריה</button></li>
+                <li><button class="btn-nav" onclick="onSavedClick()">שמורות</button></li>
             </ul>
-            <button class="btn-toggle-menu" type="button" onclick="toggleMenu()">☰</button>
+            <button class="btn-toggle-menu" type="button" onclick="onToggleMenu()">☰</button>
             <select class="lang-picker" name="lang-picker" onchange="onChangeLang(this)">
-                <option value="Eng">Eng</option>
-                <option value="Heb" selected>Heb</option>
+                <option value="eng">Eng</option>
+                <option value="heb" selected>Heb</option>
             </select>
         </nav>
     </header>
     <main>
-        <!-- Gallery Section-->
-        <div class="gallery-bar filter-bar">
-            <input list="Topics" class="img-filter" placeholder=" Search.." name="browser" id="browser">
-            <datalist id="Topics">
-                <option value="Funny">
-                <option value="Sarcatic">
-                <option value="Bad">
-                <option value="Akward">
-                <option value="Animal">
-            </datalist>
-            <!-- <input onchange="onImgInput(event)" type="file" accept=".jpg, .jpeg, .png, .webp" class="btn btn-file-input"
-                id="file-input" name="image" />
-            <div class="file-name" id="file-name"></div> -->
+        <!-- Galleries -->
+        <div class="gallery-wrap">
+            <section class="gallery-container"></section>
+            <footer>
+                <div><img src="img/logo.png" class="footer-logo"></div>
+                <small>all rights reserved 2025</small>
+            </footer>
         </div>
-        <section class="gallery-container grid">
-        </section>
-        <section class="saved-container gallery-container grid hidden"></section>
-
+        <div class="saved-wrap hidden">
+            <section class="saved-container"></section>
+        </div>
         <!--Canvas-Editor Section-->
-        <section class="main-container grid editor-layout hidden">
-            <!-- Canvas -->
-            <div class="canvas-container">
-                <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()"
-                    onmousemove="onMove(event)" ontouchstart="onDown(event)" ontouchend="onUp()"
-                    ontouchmove="onMove(event)"></canvas>
-                </canvas>
-            </div>
-            <!-- Editor -->
-            <div class="editor-container">
-                <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
-                <div>
-                    <button class="btn btn-increase-font" onclick="onMoveText(-1)"><img src="img/icons/up-arrow.png"
-                            alt=""></button>
-                    <button class="btn btn-decrease-font" onclick="onMoveText(1)"><img src="img/icons/down-arrow.png"
-                            alt=""></button>
-                    <button class="btn btn-switch-line" onclick="onSwitchLine()"><img
-                            src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                    <button class="btn add-line" onclick="onAddLine()"><img src="img/icons/add.png" alt=""></button>
-                    <button class="btn delete-line" onclick="onDeleteLine()"><img src="img/icons/trash.png"
-                            alt=""></button>
+        <div class="editor-wrap hidden">
+            <section class="main-container">
+                <!-- Canvas -->
+                <div class="canvas-container">
+                    <canvas width="300" height="300" onmousedown="onDown(event)" onmouseup="onUp()"
+                        onmousemove="onMove(event)" ontouchstart="onDown(event)" ontouchend="onUp()"
+                        ontouchmove="onMove(event)"></canvas>
+                    </canvas>
                 </div>
-                <div>
-
-                    <button class="btn btn-increase-font" onclick="onChangeFontSize(1)"><img
-                            src="img/icons/increase font - icon.png" alt=""></button>
-                    <button class="btn btn-decrease-font" onclick="onChangeFontSize(-1)"><img
-                            src="img/icons/decrease font - icon.png" alt=""></button>
-                    <button class="btn btn-align-left" onclick="onSetAlignment('left')"><img
-                            src="img/icons/align-to-left.png" alt=""></button>
-                    <button class="btn btn-center" onclick="onSetAlignment('center')"><img
-                            src="img/icons/center-text-alignment.png" alt=""></button>
-                    <button class="btn btn-align-right" onclick="onSetAlignment('right')"><img
-                            src="img/icons/align-to-right.png" alt=""></button>
+                <!-- Editor -->
+                <div class="editor-container">
+                    <input class="canvas-text" type="text" placeholder="Type something" oninput="onDrawText(event)" />
+                    <div>
+                        <button class="btn btn-increase-font" onclick="onMoveText(-1)">
+                            <img src="img/icons/up-arrow.png" alt=""></button>
+                        <button class="btn btn-decrease-font" onclick="onMoveText(1)">
+                            <img src="img/icons/down-arrow.png" alt=""></button>
+                        <button class="btn btn-switch-line" onclick="onSwitchLine()">
+                            <img src="img/icons/up-and-down-arrows.png" alt="">
+                        </button>
+                        <button class="btn btn-add-line" onclick="onAddLine()">
+                            <img src="img/icons/add.png" alt="">
+                        </button>
+                        <button class="btn btn-delete-line" onclick="onDeleteLine()">
+                            <img src="img/icons/trash.png" alt="">
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-increase-font" onclick="onChangeFontSize(1)">
+                            <img src="img/icons/increase-font.png" alt="">
+                        </button>
+                        <button class="btn btn-decrease-font" onclick="onChangeFontSize(-1)">
+                            <img src="img/icons/decrease-font.png" alt="">
+                        </button>
+                        <button class="btn btn-align-left" onclick="onSetAlignment('left')">
+                            <img src="img/icons/align-to-left.png" alt="">
+                        </button>
+                        <button class="btn btn-center" onclick="onSetAlignment('center')">
+                            <img src="img/icons/center-text-alignment.png" alt="">
+                        </button>
+                        <button class="btn btn-align-right" onclick="onSetAlignment('right')">
+                            <img src="img/icons/align-to-right.png" alt="">
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn emoji" onclick="onAddEmoji('🤯')">🤯</button>
+                        <button class="btn emoji" onclick="onAddEmoji('💩')">💩</button>
+                        <button class="btn emoji" onclick="onAddEmoji('😘')">😘</button>
+                        <button class="btn emoji" onclick="onAddEmoji('❤️')">❤️</button>
+                        <button class="btn emoji" onclick="onAddEmoji('🥳')">🥳</button>
+                    </div>
+                    <div class="flex fix">
+                        <button class="btn btn-color-picker">
+                            <label for="color-picker">
+                                <img class="color-picker" src="img/Icons/paint-board-and-brush.png">
+                            </label>
+                            <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
+                                class="color-picker" onchange="onChangeTextColor(event.target.value)" />
+                            <button class="btn btn-text btn-flexible" onclick="onFlexMeme()">תפתיע אותי</button>
+                            <select class="font-picker" name="font-picker" onchange="onSetFont(this.value)">
+                                <option value="arial">Arial</option>
+                                <option value="impact">Impact</option>
+                                <option value="verdana">Verdana</option>
+                            </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-text" onclick="onSaveMeme()">שמור</button>
+                        <button class="btn btn-text">
+                            <a href="#" onclick="onDownloadImg(this)" download="meme.jpg">הורד</a>
+                        </button>
+                        <button class="btn btn-text" onclick="onShare(event)">שתף</button>
+                        <div class="share-container" hidden> </div>
+                    </div>
                 </div>
-                <div>
-                    <button class="btn emoji" onclick="onAddEmoji('🤯')">🤯</button>
-                    <button class="btn emoji" onclick="onAddEmoji('💩')">💩</button>
-                    <button class="btn emoji" onclick="onAddEmoji('😘')">😘</button>
-                    <button class="btn emoji" onclick="onAddEmoji('❤️')">❤️</button>
-                    <button class="btn emoji" onclick="onAddEmoji('🥳')">🥳</button>
-                </div>
-                <div class="flex fix">
-                    <button class="btn btn-color-picker">
-                        <label for="color-picker">
-                            <img class="color-picker" src="img/Icons/paint-board-and-brush.png">
-                        </label>
-                        <input type="color" hidden name="color-picker" value="#000000" id="color-picker"
-                            class="color-picker" onchange="onChangeTextColor(event)" />
-                        <button class="btn btn-text btn-flexible" onclick="onFlexMeme()">תפתיע אותי</button>
-                        <select class="font-picker" name="font-picker" onchange="onSetFont(this)">
-                            <option value="arial">Arial</option>
-                            <option value="impact">Impact</option>
-                            <option value="verdana">Verdana</option>
-                        </select>
-                </div>
-                <div>
-                    <button class="btn btn-text"><a href="#" onclick="onSaveMeme()">שמור</a></button>
-                    <button class="btn btn-text"><a href="#" onclick="onDownloadImg(this)"
-                            download="meme.jpg">הורד</a></button>
-                    <button class="btn btn-text" onclick="onShare(event)">שתף</button>
-                    <div class="share-container" hidden> </div>
-                </div>
-            </div>
-        </section>
-
+            </section>
+        </div>
     </main>
+
+
 
     <script src="js/utils.service.js"></script>
     <script src="js/storage.service.js"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
     <script src="js/editor.controller.js"></script>
+
 </body>
 
 </html>

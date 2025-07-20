@@ -11,6 +11,7 @@
 @import url("components/saved-gallery.css");
 @import url("components/main-header.css");
 @import url("components/ediotr.css");
+@import url("components/footer.css");
 
 /* MEDIA QUERIES */
 @import url("setup/mq.css");

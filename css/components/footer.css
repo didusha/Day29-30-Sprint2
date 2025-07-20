@@ -1,0 +1,10 @@
+footer {
+    background-color: var(--clrPrimary);
+    color: var(--clrSecondary);
+    padding: 10px;
+    text-align: center;
+}
+
+.footer-logo {
+    max-width: 100px;
+}

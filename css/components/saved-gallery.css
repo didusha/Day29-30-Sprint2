@@ -4,13 +4,23 @@
     margin: 1rem 1rem;
 }
 
+.saved-container img:hover {
+    outline: 5px solid var(--clrPrimary);
+}
+
 .saved-img-container {
     position: relative;
 }
 
+
 .btn-delete-saved {
     position: absolute;
     right: 3px;
-    bottom: 6px;
+    bottom: 8px;
     font-size: .5rem;
+}
+
+.saved-container img {
+    border-radius: 0.5rem;
+    cursor: pointer;
 }

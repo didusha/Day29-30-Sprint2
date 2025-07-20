@@ -1,6 +1,8 @@
 :root {
     /* PALLETE */
-    --clrPrimary-2: #c2c1c1;
-    --clrPrimary-1: #ff4d00;
     --clrPrimary: #ff7f00;
+    --clrPrimary-1: #ff4d00;
+
+    --clrSecondary: white;
+    --clrSecondery-1: #c2c1c1;
 }

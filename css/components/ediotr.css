@@ -1,56 +1,55 @@
 .editor-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: .8125rem;
 
     width: 90%;
     margin: 0 auto;
-    padding-block: .5rem;
+    min-width: 320px;
+    border-radius: 20px;
 }
 
 .canvas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 300px;
     text-align: center;
 }
 
 input.canvas-text {
-    width: 240px;
-    padding: 10px 20px;
-    border: 2px solid black;
+    width: 15rem;
+    padding: .625rem 1.25rem;
+    border: none;
     border-radius: 10px;
 }
 
 .font-picker {
     font-size: 1.2em;
-    border: 1px solid black;
+    border: none;
     border-radius: 10px;
 }
 
 .btn-text {
     font-size: 1.2rem;
-    padding: 10px 15px;
-    font-weight: 400;
+    padding: .625rem .9375rem;
     width: max-content;
     border: none;
-    color: white;
+    color: var(--clrSecondary);
     background-color: var(--clrPrimary);
 }
 
-.btn-text:hover{
+.btn-text:hover {
     background-color: var(--clrPrimary-1);
 }
 
-.btn-text a {
-    padding-block: 0;
-    text-decoration: none;
-    color: black;
-}
-
 .btn-text a:visited {
-    color: white;
+    color: var(--clrSecondary);
 }
 
-div.fix {
+.fix {
     gap: 5px;
 }
-

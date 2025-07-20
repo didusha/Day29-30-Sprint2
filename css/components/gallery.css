@@ -6,33 +6,9 @@
 
 .gallery-container img {
     cursor: pointer;
+    border-radius: 0.5rem;
 }
 
 .gallery-container img:hover {
     outline: 5px solid var(--clrPrimary);
-}
-
-div.gallery-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.btn-file-input {
-    font-size: .5rem;
-    width: max-content;
-}
-
-label.file-input-button {
-    font-size: .5rem;
-    width: max-content;
-}
-
-.img-filter {
-    width: 170px;
-    border-radius: 20px;
-    padding-block: 2px;
 }

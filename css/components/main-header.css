@@ -3,9 +3,9 @@
 	position: sticky;
 	top: 0;
 	background-color: var(--clrPrimary);
-	/* margin-bottom: 1rem; */
-	padding: 1rem 1rem .625rem 1rem;
+	padding: .8rem;
 	z-index: 10;
+	margin-bottom: .8rem;
 }
 
 .main-header .main-nav {
@@ -19,10 +19,8 @@
 }
 
 .btn-nav {
-	border: none;
 	background-color: transparent;
-	font-size: .8rem;
-	color: #ffffff;
+	color: var(--clrSecondary);
 	cursor: pointer;
 	margin-left: 1em;
 }
@@ -37,9 +35,7 @@
 .main-header .btn-toggle-menu {
     font-size: 1.5rem;
     background-color: transparent;
-	border: none;
-    color: white;
-	transition: all 1s;
+    color: var(--clrSecondary);
 }
 
 .nav-bar{
@@ -51,3 +47,9 @@
 	opacity: 1;
 }
 
+.lang-picker {
+    margin-inline: .5rem;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+}
