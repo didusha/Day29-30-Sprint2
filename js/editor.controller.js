@@ -1,9 +1,8 @@
 'use strict'
 
-
 // Add text on Meme
 function onDrawText(ev) {
-    setLineTxt(ev)
+    setLineTxt(ev.target.value)
     renderMeme()
 }
 
@@ -28,20 +27,18 @@ function onChangeFontSize(diff) {
     renderMeme()
 }
 
-function onSetAlignment(alignDirection) {
-    setAlignment(alignDirection)
+function onSetAlignment(alignment) {
+    setAlignment(alignment)
     renderMeme()
 }
 
-function onSetFont(elInput) {
-    let value = elInput.value
-    setFont(value)
+function onSetFont(font) {
+    setFont(font)
     renderMeme()
 }
 
-function onChangeTextColor(event) {
-    const value = event.target.value
-    changeTextColor(value)
+function onChangeTextColor(color) {
+    changeTextColor(color)
     renderMeme()
 }
 
@@ -55,8 +52,7 @@ function onMoveText(diff) {
     renderMeme()
 }
 
-//TODO fix trigger for remove border 
-function onSaveMeme(){
+function onSaveMeme() {
     gToRemoveBorders = true
     renderMeme()
     const imgContent = gElCanvas.toDataURL('image/jpeg')
@@ -64,13 +60,13 @@ function onSaveMeme(){
     gToRemoveBorders = false
 }
 
-function onFlexMeme(){
-    onSelectImg(getRandomIntInclusive(1,18))
+function onFlexMeme() {
+    onSelectImg(getRandomIntInclusive(1, 18))
     const meme = getMeme()
     meme.lines.forEach(line => {
         line.txt = getRandomText()
         line.color = getRandomColor()
-        line.size = getRandomIntInclusive(16,30)
+        line.size = getRandomIntInclusive(16, 30)
         line.font = getRandomFont()
     })
     renderMeme()
@@ -78,23 +74,23 @@ function onFlexMeme(){
 
 //Download image 
 function onDownloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
+    gToRemoveBorders = true
+    renderMeme()
+    const dataURL = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = dataURL
+    gToRemoveBorders = false
 }
 
 // Upload to cloud & FB 
-
 function onUploadToFB(url) {
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
 
 function onShare(ev) {
-
     const canvasData = gElCanvas.toDataURL('image/jpeg')
     function onSuccess(uploadedImgUrl) {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
         onUploadToFB(encodedUploadedImgUrl)
     }
     uploadImg(canvasData, onSuccess)
-    
 }

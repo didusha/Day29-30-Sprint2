@@ -16,7 +16,7 @@ function onInit() {
 }
 
 function onSelectImg(imgId) {
-    createMeme(imgId)
+    _createMeme(imgId)
     showEditor()
 }
 
@@ -26,29 +26,22 @@ function renderMeme() {
     var img = new Image();
     img.src = `img/gallery/${meme.selectedImgId}.jpg`
 
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        renderLines(meme)
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    renderLines(meme)
 
-        if (!gToRemoveBorders) {
-            if (meme.selectedLineIdx === 0) setTextBorder()
-            else {
-                setTextBorder()
-            }
-        }
-        const canvasInput = document.querySelector('.canvas-text')
-        canvasInput.focus()
-        canvasInput.placeholder = meme.lines[meme.selectedLineIdx].txt
+    if (!gToRemoveBorders) {
+        setTextBorder()
     }
+    const canvasInput = document.querySelector('.canvas-text')
+    canvasInput.focus()
+    canvasInput.placeholder = meme.lines[meme.selectedLineIdx].txt
 }
 
 function renderLines(meme) {
-    meme.lines.forEach((line, idx) => {
+    meme.lines.forEach((line) => {
         gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.color
-        // gCtx.textAlign = 'center'
         const diff = checkAlignment(line.alignment)
-
         gCtx.fillText(line.txt, line.x + diff, line.y)
     })
 }
@@ -94,7 +87,6 @@ function checkAlignment(alignment) {
 }
 
 function onDeleteSavedMeme(memeId) {
-    console.log("memeId:", memeId)
     deleteSavedMeme(memeId)
     renderSavedGallery()
 }
@@ -126,7 +118,7 @@ function onMove(ev) {
 
 function onUp() {
     gIsMouseDown = false
-    setisDrag()
+    setIsDrag()
     document.body.style.cursor = 'default'
 }
 
@@ -153,8 +145,8 @@ function getEvPos(ev) {
 
 //Download image 
 function onDownloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
+    const dataURL = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = dataURL
 }
 
 //Render Gallery
@@ -169,7 +161,6 @@ function renderGallery() {
 function renderSavedGallery() {
     const elGallery = document.querySelector('.saved-container')
     var savedMemes = getSavedMemes()
-    console.log("savedMemes:", savedMemes)
 
     if (!savedMemes.length) {
         elGallery.innerHTML = '<p>No saved memes yet...</p>'
@@ -192,7 +183,6 @@ function onSelectSavedMeme(memeId) {
 function onGalleryClick() {
     //Show Gallery
     document.querySelector('.gallery-container').classList.remove('hidden')
-    // document.querySelector('.filter-bar').style.display = 'flex'
     document.querySelector('.main-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
 }
@@ -210,11 +200,10 @@ function showEditor() {
     document.querySelector('.main-container').classList.remove('hidden')
     document.querySelector('.gallery-container').classList.add('hidden')
     document.querySelector('.saved-container').classList.add('hidden')
-    // document.querySelector('.filter-bar').style.display = 'none'
     renderMeme()
 }
 
-function toggleMenu() {
+function onToggleMenu() {
     gIsOpen = !gIsOpen
     document.querySelector('.nav-bar').classList.toggle('menu-open')
     if (gIsOpen) document.querySelector('.btn-toggle-menu').innerHTML = 'X'
@@ -247,10 +236,8 @@ function renderImg(elImg) {
 }
 
 //Change language
-function onChangeLang(elSelect){
+function onChangeLang(elSelect) {
     const lang = elSelect.value
-    if(lang === 'Heb')
-        window.location.href = 'index-heb.html'
-    if(lang === 'Eng')
-        window.location.href = 'index.html'
+    if (lang === 'Heb') window.location.href = 'index-heb.html'
+    if (lang === 'Eng') window.location.href = 'index.html'
 }

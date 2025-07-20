@@ -1,7 +1,7 @@
 .gallery-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin: 10px auto;
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 1rem;
 }
 
 .gallery-container img {
@@ -9,18 +9,7 @@
 }
 
 .gallery-container img:hover {
-    outline: 5px solid var(--clrSecondary);
-}
-
-.saved-img-container {
-    position: relative;
-}
-
-.btn-delete-saved {
-    position: absolute;
-    right: 3px;
-    bottom: 6px;
-    font-size: .5rem;
+    outline: 5px solid var(--clrPrimary);
 }
 
 div.gallery-bar {

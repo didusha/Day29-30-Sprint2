@@ -1,0 +1,16 @@
+.saved-container {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 1rem;
+}
+
+.saved-img-container {
+    position: relative;
+}
+
+.btn-delete-saved {
+    position: absolute;
+    right: 3px;
+    bottom: 6px;
+    font-size: .5rem;
+}

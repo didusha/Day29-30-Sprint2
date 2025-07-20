@@ -3,10 +3,6 @@
     display: grid;
 }
 
-.grid.flow-column {
-    grid-auto-flow: column;
-}
-
 .grid.align-center {
     align-items: center;
 }
@@ -42,17 +38,4 @@
 /* display helpers */
 .hidden {
     display: none;
-}
-
-/* Position helpers */
-.absolute {
-    position: absolute;
-}
-
-.relative {
-    position: relative;
-}
-
-.fixed {
-    position: fixed;
 }

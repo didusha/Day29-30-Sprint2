@@ -8,6 +8,7 @@
 
 /* COMPONENTS */
 @import url("components/gallery.css");
+@import url("components/saved-gallery.css");
 @import url("components/main-header.css");
 @import url("components/ediotr.css");
 

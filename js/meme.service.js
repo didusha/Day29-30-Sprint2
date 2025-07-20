@@ -1,14 +1,13 @@
 'use strict'
 
 const IMG_KEY = 'imgDB'
-const TEST = 'test'
 const MEME_KEY = 'memeDB'
 const SAVED_MEME_KEY = 'savedMemesDB'
 
 var gImgs
 var gMeme
 var gSavedMemes
-var gmemeId = 100
+var gMemeId = 100
 var gImgId = 20
 _createImgs()
 _loadsavedMemes()
@@ -32,22 +31,22 @@ function getSavedMemes() {
     return gSavedMemes
 }
 
-function setLineTxt(ev) {
+function setLineTxt(txt) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
-    line.txt = ev.target.value
+    line.txt = txt
 }
 
-function setFont(value) {
-    gMeme.lines[gMeme.selectedLineIdx].font = value
+function setFont(font) {
+    gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
-function changeTextColor(value) {
-    gMeme.lines[gMeme.selectedLineIdx].color = value
+function changeTextColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 function switchLine() {
-    let { selectedLineIdx, lines } = gMeme
-    selectedLineIdx < lines.length - 1 ? gMeme.selectedLineIdx += 1 : gMeme.selectedLineIdx = 0
+    const { selectedLineIdx, lines } = gMeme
+    gMeme.selectedLineIdx = (selectedLineIdx < lines.length - 1) ? gMeme.selectedLineIdx += 1 : 0
 }
 
 function addLine(txt, size, color) {
@@ -62,17 +61,16 @@ function deleteLine() {
 }
 
 function updateMeme(memeId) {
-    console.log("memeId:", memeId)
-    const meme = gSavedMemes.find(savedMeme => savedMeme.id === memeId)
-    gMeme = meme.meme
+    const savedMeme = gSavedMemes.find(savedMeme => savedMeme.id === memeId)
+    gMeme = savedMeme.meme
 }
 
 function changeFontSize(diff) {
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
 
-function setAlignment(alignDirection) {
-    gMeme.lines[gMeme.selectedLineIdx].alignment = alignDirection
+function setAlignment(alignment) {
+    gMeme.lines[gMeme.selectedLineIdx].alignment = alignment
 }
 
 function addImoji(imoji) {
@@ -83,35 +81,110 @@ function moveTextUpDown(diff) {
     gMeme.lines[gMeme.selectedLineIdx].y += diff
 }
 
+//Upload to cloud
+async function uploadImg(imgData, onSuccess) {
+    const CLOUD_NAME = 'webify'
+    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+    const formData = new FormData()
+    formData.append('file', imgData)
+    formData.append('upload_preset', 'webify')
+    try {
+        const res = await fetch(UPLOAD_URL, {
+            method: 'POST',
+            body: formData
+        })
+        const data = await res.json()
+        onSuccess(data.secure_url)
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+//Save memes to storage
+function saveMeme(dataURL) {
+    if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = []
+    const memeToSave = {
+        id: gMemeId++,
+        dataURL: dataURL,
+        meme: gMeme
+    }
+    gSavedMemes.push(memeToSave)
+    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
+}
+
+function _loadsavedMemes() {
+    gSavedMemes = loadFromStorage(SAVED_MEME_KEY, gSavedMemes)
+}
+
+function deleteSavedMeme(memeId) {
+    const idx = gSavedMemes.findIndex(savedMeme => savedMeme.id === memeId)
+    gSavedMemes.splice(idx, 1)
+    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
+}
+
+//Drag & Drop
+function isTextclicked(pos) {
+    for (var i = 0; i < gMeme.lines.length; i++) {
+        const line = gMeme.lines[i]
+        //Update font measurments for inc/dec
+        // gCtx.font = `${line.size}px ${line.font}`;
+        //Check alignment
+        const diff = checkAlignment(line.alignment)
+        console.log("diff:", diff)
+
+        const textMetrics = gCtx.measureText(line.txt)
+        const textWidth = textMetrics.width
+        const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
+
+        const xStart = line.x - diff - 10
+        const xEnd = xStart + textWidth - 10
+        const yStart = line.y - textMetrics.actualBoundingBoxAscent - 10
+        const yEnd = yStart + textHeight + 10
+
+        if (pos.x >= xStart && pos.x <= xEnd &&
+            pos.y >= yStart && pos.y <= yEnd) {
+            line.isDrag = true;
+            return true;
+        }
+    }
+    return false
+}
+
+function setNewLinePos(dx, dy) {
+    const lineId = gMeme.lines.findIndex(line => line.isDrag)
+    gMeme.lines[lineId].x += dx
+    gMeme.lines[lineId].y += dy
+
+}
+
+function setIsDrag() {
+    gMeme.lines.forEach(line => line.isDrag = false)
+}
+
 //Create functions
 function _createImgs() {
     gImgs = loadFromStorage(IMG_KEY, gImgs)
     if (!gImgs || !gImgs.length) {
         gImgs = []
         for (var i = 1; i <= 18; i++) {
-            gImgs.push(
-                _createImg(
-                    i,
-                    `img/gallery/${i}.jpg`,
-                    []
-                )
-            )
+            gImgs.push(_createImg(i,`img/gallery/${i}.jpg`,[]))
         }
         saveToStorage(IMG_KEY, gImgs)
     }
 }
 
-function _createImg(url, keywords) {
+function _createImg(id, url, keywords) {
     const img = {
-        id: gImgId++,
+        id,
         url,
-        keywords: addKeywords(),
+        keywords,
     }
-    gImgs.push(img)
     return img
 }
 
-function createMeme(imgId) {
+function _createMeme(imgId) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
@@ -150,94 +223,8 @@ function _createLine(txt, size = 15, color, font) {
         x: 150,
         y: 150,
         alignment: 'center',
-        font: 'arial',
+        font: 'impact',
     }
-
-}
-
-//Upload to cloud
-async function uploadImg(imgData, onSuccess) {
-    const CLOUD_NAME = 'webify'
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-    const formData = new FormData()
-    formData.append('file', imgData)
-    formData.append('upload_preset', 'webify')
-    try {
-        const res = await fetch(UPLOAD_URL, {
-            method: 'POST',
-            body: formData
-        })
-        const data = await res.json()
-        onSuccess(data.secure_url)
-
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-
-//Save memes to storage
-function saveMeme(imgContent) {
-    if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = []
-    const memeToSave = {
-        id: gmemeId++,
-        dataURL: imgContent,
-        meme: gMeme
-    }
-    gSavedMemes.push(memeToSave)
-    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
-}
-
-function _loadsavedMemes() {
-    gSavedMemes = loadFromStorage(SAVED_MEME_KEY, gSavedMemes)
-}
-
-function deleteSavedMeme(memeId) {
-    const idx = gSavedMemes.findIndex(savedMeme => savedMeme.id === memeId)
-    gSavedMemes.splice(idx, 1)
-    saveToStorage(SAVED_MEME_KEY, gSavedMemes)
-}
-
-//Drag & Drop
-function isTextclicked(pos) {
-    console.log("clicked pos:", pos)
-    console.log("Text pos", gMeme.lines[0].x, gMeme.lines[0].y)
-
-    for (var i = 0; i < gMeme.lines.length; i++) {
-        const line = gMeme.lines[i]
-        //Update font measurments for inc/dec
-        // gCtx.font = `${line.size}px ${line.font}`;
-        //Check alignment
-        const diff = checkAlignment(line.alignment)
-        console.log("diff:", diff)
-
-        const textMetrics = gCtx.measureText(line.txt)
-        const textWidth = textMetrics.width
-        const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
-
-        const xStart = line.x - diff - 10
-        const xEnd = xStart + textWidth - 10
-        const yStart = line.y - textMetrics.actualBoundingBoxAscent - 10
-        const yEnd = yStart + textHeight + 10
-
-        if (pos.x >= xStart && pos.x <= xEnd &&
-            pos.y >= yStart && pos.y <= yEnd) {
-            line.isDrag = true;
-            return true;
-        }
-    }
-    return false
-}
-
-function setNewLinePos(dx, dy) {
-    const LineId = gMeme.lines.findIndex(line => line.isDrag)
-    gMeme.lines[LineId].x += dx
-    gMeme.lines[LineId].y += dy
-
-}
-
-function setisDrag() {
-    gMeme.lines.forEach(line => line.isDrag = false)
 }
 
 
