@@ -58,6 +58,7 @@ function addLine(txt, size, color) {
 function deleteLine() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines.splice(lineIdx, 1)
+    gMeme.selectedLineIdx = 0
 }
 
 function updateMeme(memeId) {
