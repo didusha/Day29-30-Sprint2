@@ -53,3 +53,19 @@ input.canvas-text {
 .fix {
     gap: 5px;
 }
+
+.modal {
+    position: fixed;
+    top: 20%;
+    left: 0;
+    font-size: .6rem;
+    background-color: var(--clrPrimary);
+    padding: 5px;
+    border-radius: 0 5px 5px 0;
+    opacity: 0;
+    transition: 1s;
+}
+
+.modal.open-modal{
+    opacity: 1;
+}

@@ -55,8 +55,12 @@ function onMoveText(diff) {
 function onSaveMeme() {
     gToRemoveBorders = true
     renderMeme()
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    saveMeme(imgContent)
+    const dataURL = gElCanvas.toDataURL('image/jpeg')
+    saveMeme(dataURL)
+    document.querySelector('.modal').classList.add('open-modal')
+    setTimeout(() => {
+        document.querySelector('.modal').classList.remove('open-modal')
+    }, 1500);
     gToRemoveBorders = false
 }
 
