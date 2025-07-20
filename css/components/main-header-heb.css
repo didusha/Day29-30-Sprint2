@@ -1,3 +1,7 @@
+.main-header{
+        flex-direction: row-reverse;
+}
+
 .main-nav {
     display: flex;
     flex-direction: row-reverse;
