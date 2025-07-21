@@ -129,15 +129,13 @@ function deleteSavedMeme(memeId) {
 function isTextclicked(pos) {
     for (var i = 0; i < gMeme.lines.length; i++) {
         const line = gMeme.lines[i]
-        //Update font measurments for inc/dec
-        // gCtx.font = `${line.size}px ${line.font}`;
-        //Check alignment
+        gCtx.font = `${line.size}px ${line.font}`;
         const diff = checkAlignment(line.alignment)
         console.log("diff:", diff)
 
         const textMetrics = gCtx.measureText(line.txt)
         const textWidth = textMetrics.width
-        const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent
+        const textHeight = textMetrics.actualBoundingBoxAscent
 
         const xStart = line.x - diff - 10
         const xEnd = xStart + textWidth - 10
@@ -146,7 +144,10 @@ function isTextclicked(pos) {
 
         if (pos.x >= xStart && pos.x <= xEnd &&
             pos.y >= yStart && pos.y <= yEnd) {
+            gMeme.selectedLineIdx = i
             line.isDrag = true;
+            document.querySelector('.canvas-text').value = line.txt
+            renderMeme()
             return true;
         }
     }
@@ -170,7 +171,7 @@ function _createImgs() {
     if (!gImgs || !gImgs.length) {
         gImgs = []
         for (var i = 1; i <= 18; i++) {
-            gImgs.push(_createImg(i,`img/gallery/${i}.jpg`,[]))
+            gImgs.push(_createImg(i, `img/gallery/${i}.jpg`, []))
         }
         saveToStorage(IMG_KEY, gImgs)
     }
